@@ -15,7 +15,7 @@ class Header extends React.Component {
     return (
       <header className="header">
         <Navbar fixed="top" bg="light" variant="light">
-          <Container>
+          <Container style={{ marginRight: 0 }}>
             <Navbar.Brand>
               <Link to="/home">
                 <img
@@ -32,29 +32,31 @@ class Header extends React.Component {
                 </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link className="header-link" to="/">
+                <Link className="header-link" to="/yoga">
                   Cours de Yoga
                 </Link>
               </Nav.Link>
-              <Nav.Link>
-                <Link className="header-link" to="/">
-                  Yoga Psy
-                </Link>
+              <Nav.Link
+                href="https://www.yogapsy.fr/28834-yogapsy-yoga-et-psychotherapie.php"
+                target="_blank"
+                className="header-link"
+              >
+                Yoga Psy
               </Nav.Link>
               <Nav.Link>
-                <Link className="header-link" to="/">
+                <Link className="header-link" to="/meditation">
                   Meditation
                 </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link className="header-link" to="/">
+                <Link className="header-link" to="/other">
                   Autres activités
                 </Link>
               </Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link>
-                <Link className="header-link" to="/home">
+                <Link className="header-link" to="/login">
                   Se connecter
                 </Link>
               </Nav.Link>
