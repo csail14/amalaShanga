@@ -73,7 +73,7 @@ class Header extends React.Component {
                   <img
                     style={{ maxWidth: "200px", borderRadius: "12px" }}
                     src={auroville}
-                    alt="logo_auroville"
+                    alt="logo_"
                   />
                 </Navbar.Brand>
               </PartnerContainer>

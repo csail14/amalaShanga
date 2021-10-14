@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import home_illu from "../../assets/home_illu.jpeg";
+import { Link } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const MainContainer = styled.div`
   padding-top: 100px;
@@ -13,38 +15,58 @@ const TitleContainer = styled.p`
   color: white;
   font-weight: 700;
   font-size: 32px;
+  text-align: center;
+`;
+
+const SubTitleContainer = styled.p`
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  margin: 20px;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 0 50px;
-`;
-const TextContainer = styled.div`
-  padding: 30px;
+  margin: 0 450px;
   color: white;
-  font-size: 20px;
+  border: 0.5px solid white;
+  border-radius: 12px;
+  padding: 12px;
 `;
+
 const Home = (props) => {
   return (
     <MainContainer>
-      <TitleContainer>Bienvenue sur le site de Amala Sangha !</TitleContainer>
+      <TitleContainer>
+        Connectez-vous à votre compte Amala Sangha pour accéder à vos contenus
+      </TitleContainer>
       <InfoContainer>
-        <img
-          style={{ borderRadius: "300px", maxHeight: "400px", margin: "40px" }}
-          src={home_illu}
-          alt="home_illu"
-        />
-        <TextContainer>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
-        </TextContainer>
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Adresse Email</Form.Label>
+            <Form.Control type="email" placeholder="Entrer votre email" />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Mot de passe</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Entrer votre mot de passe"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Se souvenir de moi " />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Connexion
+          </Button>
+        </Form>
       </InfoContainer>
+      <SubTitleContainer>
+        Pas encore membre ? <Link to="/register">Créez un compte</Link>
+      </SubTitleContainer>
     </MainContainer>
   );
 };

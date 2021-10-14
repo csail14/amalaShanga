@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import home_illu from "../../assets/home_illu.jpeg";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const MainContainer = styled.div`
   padding-top: 100px;
+  padding-bottom: 100px;
   background-color: #7dbce0;
   min-height: 70vh;
 `;
@@ -13,37 +15,78 @@ const TitleContainer = styled.p`
   color: white;
   font-weight: 700;
   font-size: 32px;
+  text-align: center;
+`;
+
+const SubTitleContainer = styled.p`
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  margin: 20px;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 0 50px;
-`;
-const TextContainer = styled.div`
-  padding: 30px;
+  margin: 0 450px;
   color: white;
-  font-size: 20px;
+  border: 0.5px solid white;
+  border-radius: 12px;
+  padding: 12px;
 `;
 const Home = (props) => {
   return (
     <MainContainer>
-      <TitleContainer>Bienvenue sur le site de Amala Sangha !</TitleContainer>
+      <TitleContainer>Creez votre compte Amala Sangha</TitleContainer>
+      <SubTitleContainer>
+        Votre compte vous permettera, une fois votre cotisation annuelle réglée,
+        de choisir vos cours de yoga en ligne parmis une sélection proposée au
+        tarif préferentiel de 9 euros par cours, et d'acceder gratuitement à la
+        méditation en ligne hebdomadaire.
+      </SubTitleContainer>
       <InfoContainer>
-        <img
-          style={{ borderRadius: "300px", maxHeight: "400px", margin: "40px" }}
-          src={home_illu}
-          alt="home_illu"
-        />
-        <TextContainer>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
-        </TextContainer>
+        <Form>
+          <Form.Group className="mb-3" controlId="formBasic">
+            <Form.Label>Nom</Form.Label>
+            <Form.Control type="text" placeholder="Entrer votre nom" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasic">
+            <Form.Label>Prénom</Form.Label>
+            <Form.Control type="text" placeholder="Entrer votre prénom" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Adresse Email</Form.Label>
+            <Form.Control type="email" placeholder="Entrer votre email" />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Mot de passe</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Entrer votre mot de passe"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasic">
+            <Form.Label>Date de naissance JJ/MM/AA</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Entrer votre date de naissance"
+            />
+            <Form.Text className="text-muted">
+              Cette information non obligatoire a pour but d'adapter nos cours à
+              nos élèves.
+            </Form.Text>
+          </Form.Group>
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Ajouter une photo</Form.Label>
+            <Form.Control type="file" />
+          </Form.Group>
+
+          <Button variant="primary" type="submit">
+            Créer mon compte
+          </Button>
+        </Form>
       </InfoContainer>
     </MainContainer>
   );
