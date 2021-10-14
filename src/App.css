@@ -37,6 +37,15 @@
   font-weight: 700;
   color: grey;
 }
+.onHoverIsGrey:hover {
+  background-color: grey;
+  cursor: pointer;
+  color: white;
+}
+
+.onHoverIsBorderGrey:hover {
+  border: 0.5px solid grey;
+}
 
 @keyframes App-logo-spin {
   from {

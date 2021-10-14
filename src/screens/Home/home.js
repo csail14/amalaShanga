@@ -5,6 +5,7 @@ import home_illu from "../../assets/home_illu.jpeg";
 
 const MainContainer = styled.div`
   padding-top: 100px;
+  padding-bottom: 40px;
   background-color: #7dbce0;
   min-height: 70vh;
 `;

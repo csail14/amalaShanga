@@ -9,7 +9,7 @@ import Other from "./screens/Other/Other";
 import MyAccount from "./screens/Account/myAccount";
 import Login from "./screens/Account/login";
 import Register from "./screens/Account/register";
-
+import Admin from "./screens/Admin/admin";
 import Contact from "./screens/Contact/contact";
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
         <Route exact path="/myAccount" component={MyAccount} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/Register" component={Register} />
+        <Route exact path="/admin" component={Admin} />
       </Switch>
       <Footer />
     </div>

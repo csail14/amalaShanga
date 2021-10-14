@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import home_illu from "../../assets/home_illu.jpeg";
+import yoga_default_image from "../../assets/yoga_default_image.jpeg";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 const MainContainer = styled.div`
   padding-top: 100px;
+  padding-bottom: 40px;
   background-color: #7dbce0;
   min-height: 70vh;
 `;
@@ -20,30 +23,26 @@ const InfoContainer = styled.div`
   align-items: center;
   margin: 0 50px;
 `;
-const TextContainer = styled.div`
-  padding: 30px;
-  color: white;
-  font-size: 20px;
-`;
-const Home = (props) => {
+
+const Other = (props) => {
   return (
     <MainContainer>
-      <TitleContainer>Bienvenue sur le site de Amala Sangha !</TitleContainer>
+      <TitleContainer>
+        Voici la liste des cours de yoga mis à disposition
+      </TitleContainer>
       <InfoContainer>
-        <img
-          style={{ borderRadius: "300px", maxHeight: "400px", margin: "40px" }}
-          src={home_illu}
-          alt="home_illu"
-        />
-        <TextContainer>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
-        </TextContainer>
+        <Card style={{ width: "18rem" }}>
+          <Card.Img variant="top" src={yoga_default_image} />
+          <Card.Body>
+            <Card.Title>Stage de Yoga du 20 au 25 Novembre 2021</Card.Title>
+            <Card.Text>
+              Cours de yoga qui travaille sur blablablablablablablab et blublu
+              blibli et voila voili c'est comme ça.
+            </Card.Text>
+            <Card.Text>Prix: 150€</Card.Text>
+            <Button variant="primary">S'inscrire à ce stage</Button>
+          </Card.Body>
+        </Card>
       </InfoContainer>
     </MainContainer>
   );
@@ -55,4 +54,4 @@ const mapStateToProps = (store) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Other);

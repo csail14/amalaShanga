@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import home_illu from "../../assets/home_illu.jpeg";
+import meditation from "../../assets/meditation.jpeg";
 
 const MainContainer = styled.div`
   padding-top: 100px;
+  padding-bottom: 40px;
   background-color: #7dbce0;
   min-height: 70vh;
 `;
@@ -28,22 +29,16 @@ const TextContainer = styled.div`
 const Home = (props) => {
   return (
     <MainContainer>
-      <TitleContainer>Bienvenue sur le site de Amala Sangha !</TitleContainer>
+      <TitleContainer>
+        Ici lien vers la meditation tous les lundi à 19h
+      </TitleContainer>
       <InfoContainer>
         <img
-          style={{ borderRadius: "300px", maxHeight: "400px", margin: "40px" }}
-          src={home_illu}
-          alt="home_illu"
+          style={{ borderRadius: "12px", maxHeight: "400px", margin: "40px" }}
+          src={meditation}
+          alt="meditation_illu"
         />
-        <TextContainer>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
-        </TextContainer>
+        <TextContainer>Lien ici</TextContainer>
       </InfoContainer>
     </MainContainer>
   );
