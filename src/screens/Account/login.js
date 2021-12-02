@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { loginUser, getUserById } from "../../utils/API/userApi";
+import { loadUserInfo } from "../../actions/user/userActions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MainContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 40px;
-  background-color: #7dbce0;
-  min-height: 70vh;
+  background-color: #9fc3d7;
+  min-height: 96vh;
 `;
 
 const TitleContainer = styled.p`
@@ -17,6 +21,12 @@ const TitleContainer = styled.p`
   font-weight: 700;
   font-size: 32px;
   text-align: center;
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
 `;
 
 const SubTitleContainer = styled.p`
@@ -38,8 +48,53 @@ const InfoContainer = styled.div`
 `;
 
 const Home = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [shouldStoreData, setShouldStoreData] = useState(false);
+  const [error, seterrorMessage] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  const storeData = async (token) => {
+    try {
+      await AsyncStorage.setItem("AmalaToken", token);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleSumit = (e) => {
+    e.preventDefault();
+    let data = {
+      email: email,
+      password: password,
+    };
+    loginUser(data).then((res) => {
+      seterrorMessage("");
+      if (res.status === 200) {
+        if (shouldStoreData) {
+          storeData(res.token);
+        }
+        getUserById(res.user.id).then((res) => {
+          props.loadUserInfo(true, res.result);
+          setRedirect(true);
+        });
+      } else if (res.status === 404) {
+        seterrorMessage(res.msg);
+      } else if (res.status === 401) {
+        seterrorMessage(res.msg);
+      } else if (res.status === 403) {
+        seterrorMessage(res.msg);
+      } else {
+        seterrorMessage(
+          "Un problème est survenu, veuillez reessayer plus tard."
+        );
+      }
+    });
+  };
+
   return (
     <MainContainer>
+      {redirect && <Redirect to="/myAccount" />}
       <TitleContainer>
         Connectez-vous à votre compte Amala Sangha pour accéder à vos contenus
       </TitleContainer>
@@ -47,7 +102,11 @@ const Home = (props) => {
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Adresse Email</Form.Label>
-            <Form.Control type="email" placeholder="Entrer votre email" />
+            <Form.Control
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Entrer votre email"
+            />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -55,14 +114,21 @@ const Home = (props) => {
             <Form.Control
               type="password"
               placeholder="Entrer votre mot de passe"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Se souvenir de moi " />
+            <Form.Check
+              type="checkbox"
+              onChange={(e) => setShouldStoreData(e.target.checked)}
+              label="Se souvenir de moi "
+            />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button onClick={handleSumit} variant="primary" type="submit">
             Connexion
           </Button>
+
+          <ErrorMessage>{error}</ErrorMessage>
         </Form>
       </InfoContainer>
       <SubTitleContainer>
@@ -72,10 +138,10 @@ const Home = (props) => {
   );
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { loadUserInfo };
 
 const mapStateToProps = (store) => {
-  return {};
+  return { user: store.user };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

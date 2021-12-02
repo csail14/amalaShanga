@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import styled from "styled-components";
 import rameauxverts from "../assets/rameauxverts.gif";
@@ -26,15 +25,18 @@ const PartnerContainer = styled.div`
   align-items: center;
 `;
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <header className="footer">
-        <Navbar bg="dark" variant="light" style={{ display: "block" }}>
+const Header = (props) => {
+  const location = useLocation();
+  const isHome =
+    location.pathname === "/" || location.pathname.includes("home");
+  return (
+    <header className="footer">
+      <Navbar
+        bg="dark"
+        variant="light"
+        style={{ display: "flex", flexDirection: "space-between" }}
+      >
+        {isHome && (
           <Container>
             <FooterInfoContainer>
               Nos Partenaires
@@ -42,7 +44,7 @@ class Header extends React.Component {
                 <Navbar.Brand href="https://www.yogapsy.fr/" target="_blank">
                   <img
                     style={{
-                      maxWidth: "200px",
+                      maxWidth: "100px",
                       background: "#E38D02",
                       borderRadius: "12px",
                     }}
@@ -53,7 +55,7 @@ class Header extends React.Component {
                 <Navbar.Brand href="https://yogaprasad.in/" target="_blank">
                   <img
                     style={{
-                      maxWidth: "200px",
+                      maxWidth: "100px",
                       background: "white",
                       padding: "20px",
                       borderRadius: "12px",
@@ -64,14 +66,14 @@ class Header extends React.Component {
                 </Navbar.Brand>
                 <Navbar.Brand href="http://rameauxverts.org/" target="_blank">
                   <img
-                    style={{ maxWidth: "200px", borderRadius: "12px" }}
+                    style={{ maxWidth: "80px", borderRadius: "12px" }}
                     src={rameauxverts}
                     alt="logo_rameauxverts"
                   />
                 </Navbar.Brand>
                 <Navbar.Brand>
                   <img
-                    style={{ maxWidth: "200px", borderRadius: "12px" }}
+                    style={{ maxWidth: "80px", borderRadius: "12px" }}
                     src={auroville}
                     alt="logo_"
                   />
@@ -79,16 +81,14 @@ class Header extends React.Component {
               </PartnerContainer>
             </FooterInfoContainer>
           </Container>
-          <Container>
-            <CopyrightContainer>
-              © Copyright 2021 AmalaSangha
-            </CopyrightContainer>
-          </Container>
-        </Navbar>
-      </header>
-    );
-  }
-}
+        )}
+        <Container style={{ display: "flex", justifyContent: "flex-end" }}>
+          <CopyrightContainer>© Copyright 2021 AmalaSangha</CopyrightContainer>
+        </Container>
+      </Navbar>
+    </header>
+  );
+};
 
 const mapDispatchToProps = {};
 

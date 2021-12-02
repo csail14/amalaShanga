@@ -12,6 +12,7 @@ const SubTitleContainer = styled.p`
 
 const InfoContainer = styled.div`
   display: flex;
+  min-height: 96vh;
   flex-direction: column;
   background: #f8f9fa;
   margin: 10px 50px;

@@ -11,6 +11,7 @@ import Login from "./screens/Account/login";
 import Register from "./screens/Account/register";
 import Admin from "./screens/Admin/admin";
 import Contact from "./screens/Contact/contact";
+import styled from "styled-components";
 
 function App() {
   return (

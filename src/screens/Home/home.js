@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import home_illu from "../../assets/home_illu.jpeg";
-
+import { getStart } from "../../utils/API/API";
 const MainContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 40px;
-  background-color: #7dbce0;
-  min-height: 70vh;
+  background-color: #9fc3d7;
+  min-height: 80vh;
 `;
 
 const TitleContainer = styled.p`
@@ -27,6 +27,9 @@ const TextContainer = styled.div`
   font-size: 20px;
 `;
 const Home = (props) => {
+  useEffect(() => {
+    getStart();
+  }, []);
   return (
     <MainContainer>
       <TitleContainer>Bienvenue sur le site de Amala Sangha !</TitleContainer>
@@ -37,13 +40,11 @@ const Home = (props) => {
           alt="home_illu"
         />
         <TextContainer>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
+          Amala Sangha est une association qui propose pour vous accompagner
+          dans les 3 dimensions de l’être : corps , âme, esprit. Le corps et
+          l’esprit sont au service de notre âme, de notre Soi pour aller vers
+          plus de rayonnement. Grâce ses activités, Amala Sangha peut soutenir
+          une école en Inde, La petite école de Prema
         </TextContainer>
       </InfoContainer>
     </MainContainer>

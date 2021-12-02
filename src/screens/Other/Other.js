@@ -8,8 +8,8 @@ import Button from "react-bootstrap/Button";
 const MainContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 40px;
-  background-color: #7dbce0;
-  min-height: 70vh;
+  background-color: #9fc3d7;
+  min-height: 96vh;
 `;
 
 const TitleContainer = styled.p`

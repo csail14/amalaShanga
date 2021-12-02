@@ -15,7 +15,13 @@ class Header extends React.Component {
     return (
       <header className="header">
         <Navbar fixed="top" bg="light" variant="light">
-          <Container style={{ marginRight: 0 }}>
+          <Container
+            style={{
+              marginRight: 0,
+              marginLeft: "60px",
+              minWidth: "-webkit-fill-available",
+            }}
+          >
             <Navbar.Brand>
               <Link to="/home">
                 <img
@@ -60,16 +66,21 @@ class Header extends React.Component {
                   Se connecter
                 </Link>
               </Nav.Link>
-              {/* <Nav.Link>
-                <Link className="header-link" to="/home">
+              <Nav.Link>
+                <Link className="header-link" to="/register">
+                  Creer un compte
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link className="header-link" to="/myAccount">
                   Mon compte
                 </Link>
               </Nav.Link>
               <Nav.Link>
                 <Link className="header-link" to="/home">
-                  Panier
+                  Mon panier
                 </Link>
-              </Nav.Link> */}
+              </Nav.Link>
             </Nav>
           </Container>
         </Navbar>
