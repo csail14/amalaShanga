@@ -11,20 +11,24 @@ import Login from "./screens/Account/login";
 import Register from "./screens/Account/register";
 import Admin from "./screens/Admin/admin";
 import Contact from "./screens/Contact/contact";
-import styled from "styled-components";
+import RequireAuth from "./utils/require-auth";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={RequireAuth(Home, false)} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/yoga" component={Yoga} />
         <Route exact path="/meditation" component={Meditation} />
         <Route exact path="/other" component={Other} />
-        <Route exact path="/myAccount" component={MyAccount} />
+        <Route
+          exact
+          path="/myAccount"
+          component={RequireAuth(MyAccount, true)}
+        />
         <Route exact path="/login" component={Login} />
         <Route exact path="/Register" component={Register} />
         <Route exact path="/admin" component={Admin} />
