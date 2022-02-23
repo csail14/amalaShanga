@@ -1,6 +1,10 @@
 {
   "name": "amala-shanga",
-  "version": "0.1.0",
+  "description": "yoga classes app",
+  "version": "1.0.0",
+  "engines": {
+    "node": "14.16.0"
+  },
   "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
