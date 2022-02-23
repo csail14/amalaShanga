@@ -4,13 +4,12 @@ import styled from "styled-components";
 import Orders from "./TabComponent/orders";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import Classes from "./TabComponent/classes";
+import Classes from "./TabComponent/Yoga/classes";
 import Activites from "./TabComponent/activities";
 
 const MainContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 40px;
-  background-color: #9fc3d7;
   min-height: 96vh;
 `;
 

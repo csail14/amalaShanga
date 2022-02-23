@@ -22,6 +22,7 @@ const FooterInfoContainer = styled.div`
 `;
 const PartnerContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 `;
 

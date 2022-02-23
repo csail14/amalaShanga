@@ -5,10 +5,11 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ReCAPTCHA from "react-google-recaptcha";
 import { addUser } from "../../utils/API/userApi";
+import Fond3 from "../../assets/imageFond3.jpeg";
+
 const MainContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 100px;
-  background-color: #9fc3d7;
   min-height: 96vh;
 `;
 
@@ -32,6 +33,7 @@ const InfoContainer = styled.div`
   align-items: center;
   margin: 0 450px;
   color: white;
+  background-color: rgb(255, 255, 255, 0.5);
   border: 0.5px solid white;
   border-radius: 12px;
   padding: 12px;
@@ -130,7 +132,13 @@ const Home = (props) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Fond3})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <TitleContainer>Creez votre compte Amala Sangha</TitleContainer>
       <SubTitleContainer>
         Votre compte vous permettera, une fois votre cotisation annuelle réglée,
@@ -142,7 +150,7 @@ const Home = (props) => {
         {!success && (
           <Form>
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Nom *</Form.Label>
+              <Form.Label style={{ color: "#625454" }}>Nom *</Form.Label>
               <Form.Control
                 onChange={(e) => handleChange("lastName", e.target.value)}
                 type="text"
@@ -150,7 +158,7 @@ const Home = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Prénom *</Form.Label>
+              <Form.Label style={{ color: "#625454" }}>Prénom *</Form.Label>
               <Form.Control
                 type="text"
                 onChange={(e) => handleChange("firstName", e.target.value)}
@@ -158,7 +166,9 @@ const Home = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Adresse Email *</Form.Label>
+              <Form.Label style={{ color: "#625454" }}>
+                Adresse Email *
+              </Form.Label>
               <Form.Control
                 type="email"
                 onChange={(e) => handleChange("email", e.target.value)}
@@ -166,7 +176,9 @@ const Home = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Mot de passe *</Form.Label>
+              <Form.Label style={{ color: "#625454" }}>
+                Mot de passe *
+              </Form.Label>
               <Form.Control
                 type="password"
                 onChange={(e) => handleChange("password", e.target.value)}
@@ -174,7 +186,9 @@ const Home = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Confirmation du mot de passe *</Form.Label>
+              <Form.Label style={{ color: "#625454" }}>
+                Confirmation du mot de passe *
+              </Form.Label>
               <Form.Control
                 type="password"
                 onChange={(e) =>
@@ -184,7 +198,9 @@ const Home = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasic">
-              <Form.Label>Date de naissance JJ/MM/AA</Form.Label>
+              <Form.Label style={{ color: "#625454" }}>
+                Date de naissance JJ/MM/AA
+              </Form.Label>
               <Form.Control
                 type="text"
                 onChange={(e) => handleChange("birthDate", e.target.value)}
@@ -196,7 +212,9 @@ const Home = (props) => {
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Ajouter une photo</Form.Label>
+              <Form.Label style={{ color: "#625454" }}>
+                Ajouter une photo
+              </Form.Label>
               <Form.Control
                 onChange={(e) => handleChange("photo", e.target.value)}
                 type="file"
@@ -208,6 +226,7 @@ const Home = (props) => {
             />
 
             <Button
+              id="primary-btn"
               onClick={handleSubmit}
               style={{ marginTop: 15 }}
               variant="primary"

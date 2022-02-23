@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -28,6 +32,37 @@
   color: white;
 }
 
+.indicators {
+  display: flex;
+  gap: 20px;
+  z-index: 11;
+  position: absolute;
+  right: 50%;
+  margin-top: -30px !important;
+}
+.indicators .each-slideshow-indicator::before {
+  background: white;
+  height: 8px;
+  width: 8px;
+  padding: 5px;
+  line-height: 20px;
+  box-shadow: var(--box-shadow-thinner);
+  border: 1px solid grey;
+}
+
+#primary-btn {
+  color: black;
+  padding: 10px;
+  background-color: #fdfaeb;
+  border: none;
+  box-shadow: 0px 10px 15px rgb(0 0 0 / 37%);
+}
+
+a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -42,9 +77,18 @@
   color: grey;
 }
 .onHoverIsGrey:hover {
-  background-color: grey;
+  border: 1px grey solid;
   cursor: pointer;
-  color: white;
+}
+
+@media only screen and (max-width: 975px) {
+  .react-slideshow-container {
+    min-width: 100vw;
+  }
+}
+
+.footer .navbar-expand {
+  /* flex-wrap: wrap !important; */
 }
 
 @keyframes App-logo-spin {

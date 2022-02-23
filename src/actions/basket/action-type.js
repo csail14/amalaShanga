@@ -1,0 +1,3 @@
+export const ADD_IN_BASKET = "ADD_IN_BASKET";
+export const CLEAN_BASKET = "CLEAN_BASKET";
+export const DELETE_IN_BASKET = "DELETE_IN_BASKET";

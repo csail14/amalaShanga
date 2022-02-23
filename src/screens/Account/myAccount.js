@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
@@ -6,7 +7,6 @@ import fred from "../../assets/fred.jpeg";
 const MainContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 40px;
-  background-color: #9fc3d7;
   min-height: 96vh;
 `;
 
@@ -17,8 +17,8 @@ const TitleContainer = styled.p`
 `;
 
 const SubTitleContainer = styled.p`
-  color: grey;
-  font-weight: 700;
+  color: black;
+
   font-size: 20px;
   text-align: left;
 `;
@@ -40,16 +40,22 @@ const InfoDetailsContainer = styled.div`
   padding: 10px;
 `;
 const AllInfoDetailsContainer = styled.div`
+  text-decoration: none;
   display: flex;
   border-radius: 12px;
   background-color: white;
   margin: 5px 0;
   color: grey;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
 `;
-const Home = (props) => {
+const MyAccount = (props) => {
+  const userDetails = props.user && props.user.infos;
+  console.log(userDetails);
   return (
     <MainContainer>
-      <TitleContainer>Bienvenue NOM </TitleContainer>
+      <TitleContainer>
+        Bienvenue {userDetails && userDetails.firstName}{" "}
+      </TitleContainer>
       <InfoContainer>
         <SubTitleContainer>Mes informations </SubTitleContainer>
         <AllInfoDetailsContainer style={{ justifyContent: "center" }}>
@@ -64,19 +70,23 @@ const Home = (props) => {
           />
           <div>
             <InfoDetailsContainer>
-              <b>Nom :</b> Saillard
+              <b>Nom :</b> {userDetails && userDetails.lastName}
             </InfoDetailsContainer>
             <InfoDetailsContainer>
-              <b>Prénom :</b> Camille
+              <b>Prénom :</b> {userDetails && userDetails.firstName}
             </InfoDetailsContainer>
             <InfoDetailsContainer>
-              <b>Email :</b> cssaillard@gmail.com
+              <b>Email :</b> {userDetails && userDetails.email}
             </InfoDetailsContainer>
             <InfoDetailsContainer>
-              <b>Cotisation à jour :</b> Oui
+              <b>Cotisation à jour :</b>{" "}
+              {userDetails && userDetails.isMember ? "Oui" : "Non"}
             </InfoDetailsContainer>
             <InfoDetailsContainer>
-              <b>Date de naissance :</b> 24 Août 1994
+              <b>Date de naissance :</b>{" "}
+              {userDetails && userDetails.birthdate
+                ? new Date(userDetails.birthdate)
+                : "Non renseignée"}
             </InfoDetailsContainer>
           </div>
         </AllInfoDetailsContainer>
@@ -84,6 +94,7 @@ const Home = (props) => {
           <Button
             variant="primary"
             type="submit"
+            id="primary-btn"
             style={{ width: "fit-content", margin: "5px" }}
           >
             Modifier mes informations
@@ -91,10 +102,11 @@ const Home = (props) => {
           <Button
             variant="primary"
             type="submit"
+            id="primary-btn"
             style={{
               width: "fit-content",
               margin: "5px",
-              backgroundColor: "green",
+              backgroundColor: "#a4d5ff6b",
               border: "0",
             }}
           >
@@ -104,20 +116,22 @@ const Home = (props) => {
       </InfoContainer>
       <InfoContainer>
         <SubTitleContainer>Mes cours ou activités </SubTitleContainer>
-        <AllInfoDetailsContainer className="onHoverIsGrey">
-          <InfoDetailsContainer>
-            <b>Nom :</b> Cours du 21 octobre
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Date d'achat :</b> 30 Octobre 2021
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Lien :</b> http://monlien.fr
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Valide jusqu'au :</b> date
-          </InfoDetailsContainer>
-        </AllInfoDetailsContainer>
+        <Link to="studio">
+          <AllInfoDetailsContainer className="onHoverIsGrey">
+            <InfoDetailsContainer>
+              <b>Nom :</b> Cours du 21 octobre
+            </InfoDetailsContainer>
+            <InfoDetailsContainer>
+              <b>Date d'achat :</b> 30 Octobre 2021
+            </InfoDetailsContainer>
+            <InfoDetailsContainer>
+              <b>Lien :</b> http://monlien.fr
+            </InfoDetailsContainer>
+            <InfoDetailsContainer>
+              <b>Valide jusqu'au :</b> date
+            </InfoDetailsContainer>
+          </AllInfoDetailsContainer>
+        </Link>
         <AllInfoDetailsContainer className="onHoverIsGrey">
           <InfoDetailsContainer>
             <b>Nom :</b> Cours du 21 octobre
@@ -168,7 +182,7 @@ const Home = (props) => {
 const mapDispatchToProps = {};
 
 const mapStateToProps = (store) => {
-  return {};
+  return { user: store.user };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(MyAccount);

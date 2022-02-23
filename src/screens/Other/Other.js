@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import yoga_default_image from "../../assets/yoga_default_image.jpeg";
+import imageFond3 from "../../assets/imageFond3.jpeg";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { useHistory } from "react-router-dom";
 
 const MainContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 40px;
-  background-color: #9fc3d7;
   min-height: 96vh;
 `;
 
@@ -20,27 +20,120 @@ const TitleContainer = styled.p`
 
 const InfoContainer = styled.div`
   display: flex;
+  justify-content: space-around;
   align-items: center;
+
   margin: 0 50px;
 `;
 
 const Other = (props) => {
+  let history = useHistory();
   return (
     <MainContainer>
       <TitleContainer>
         Voici la liste des cours de yoga mis à disposition
       </TitleContainer>
       <InfoContainer>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={yoga_default_image} />
+        <Card
+          style={{
+            width: "20rem",
+            boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
+            borderRadius: "20px",
+            margin: "8px",
+            cursor: "pointer",
+          }}
+        >
+          <Card.Img
+            style={{
+              borderRadius: "20px 20px 12px 12px",
+              boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
+              maxHeight: 250,
+            }}
+            variant="top"
+            src={imageFond3}
+          />
           <Card.Body>
-            <Card.Title>Stage de Yoga du 20 au 25 Novembre 2021</Card.Title>
+            <Card.Title>Stage de Yoga du 22 Juillet 2022</Card.Title>
             <Card.Text>
-              Cours de yoga qui travaille sur blablablablablablablab et blublu
+              Stage de yoga qui travaille sur blablablablablablablab et blublu
               blibli et voila voili c'est comme ça.
             </Card.Text>
-            <Card.Text>Prix: 150€</Card.Text>
-            <Button variant="primary">S'inscrire à ce stage</Button>
+            <Card.Text>Prix: 200€</Card.Text>
+            <Button
+              id="primary-btn"
+              variant="primary"
+              onClick={() => history.push("/stage")}
+            >
+              Plus d'info
+            </Button>
+          </Card.Body>
+        </Card>
+        <Card
+          style={{
+            width: "20rem",
+            boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
+            borderRadius: "20px",
+            margin: "8px",
+            cursor: "pointer",
+          }}
+        >
+          <Card.Img
+            style={{
+              borderRadius: "20px 20px 12px 12px",
+              boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
+              maxHeight: 250,
+            }}
+            variant="top"
+            src={imageFond3}
+          />
+          <Card.Body>
+            <Card.Title>Stage de Yoga du 22 Juillet 2022</Card.Title>
+            <Card.Text>
+              Stage de yoga qui travaille sur blablablablablablablab et blublu
+              blibli et voila voili c'est comme ça.
+            </Card.Text>
+            <Card.Text>Prix: 200€</Card.Text>
+            <Button
+              id="primary-btn"
+              variant="primary"
+              onClick={() => history.push("/stage")}
+            >
+              Plus d'info
+            </Button>
+          </Card.Body>
+        </Card>
+        <Card
+          style={{
+            width: "20rem",
+            boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
+            borderRadius: "20px",
+            margin: "8px",
+            cursor: "pointer",
+          }}
+        >
+          <Card.Img
+            style={{
+              borderRadius: "20px 20px 12px 12px",
+              boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
+              maxHeight: 250,
+            }}
+            variant="top"
+            src={imageFond3}
+          />
+          <Card.Body>
+            <Card.Title>Stage de Yoga du 22 Juillet 2022</Card.Title>
+            <Card.Text>
+              Stage de yoga qui travaille sur blablablablablablablab et blublu
+              blibli et voila voili c'est comme ça.
+            </Card.Text>
+            <Card.Text>Prix: 200€</Card.Text>
+            <Button
+              id="primary-btn"
+              variant="primary"
+              onClick={() => history.push("/stage")}
+            >
+              Plus d'info
+            </Button>
           </Card.Body>
         </Card>
       </InfoContainer>

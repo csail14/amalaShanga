@@ -5,32 +5,37 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import logo_amala from "../assets/logo_amala.png";
+import { useMediaQuery } from "react-responsive";
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <header className="header">
-        <Navbar fixed="top" bg="light" variant="light">
-          <Container
-            style={{
-              marginRight: 0,
-              marginLeft: "60px",
-              minWidth: "-webkit-fill-available",
-            }}
-          >
-            <Navbar.Brand>
-              <Link to="/home">
-                <img
-                  style={{ maxWidth: "200px" }}
-                  src={logo_amala}
-                  alt="logo_amala"
-                />
-              </Link>
-            </Navbar.Brand>
+const Header = (props) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
+  return (
+    <header className="header">
+      <Navbar
+        collapseOnSelect
+        fixed="top"
+        bg="light"
+        variant="light"
+        expand="lg"
+      >
+        <Container
+          style={{
+            marginRight: 0,
+            marginLeft: isMobile ? "10px" : "60px",
+            minWidth: "-webkit-fill-available",
+          }}
+        >
+          <Navbar.Brand>
+            <Link to="/home">
+              <img
+                style={{ maxWidth: "200px" }}
+                src={logo_amala}
+                alt="logo_amala"
+              />
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link>
                 <Link className="header-link" to="/home">
@@ -61,38 +66,52 @@ class Header extends React.Component {
               </Nav.Link>
             </Nav>
             <Nav>
+              {props.user && !props.user.isLogged && (
+                <Nav.Link>
+                  <Link className="header-link" to="/login">
+                    Se connecter
+                  </Link>
+                </Nav.Link>
+              )}
+              {props.user && !props.user.isLogged && (
+                <Nav.Link>
+                  <Link className="header-link" to="/register">
+                    Creer un compte
+                  </Link>
+                </Nav.Link>
+              )}
+              {props.user && props.user.isLogged && (
+                <Nav.Link>
+                  <Link className="header-link" to="/myAccount">
+                    Mon compte
+                  </Link>
+                </Nav.Link>
+              )}
+
               <Nav.Link>
-                <Link className="header-link" to="/login">
-                  Se connecter
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link className="header-link" to="/register">
-                  Creer un compte
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link className="header-link" to="/myAccount">
-                  Mon compte
-                </Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link className="header-link" to="/home">
+                <Link className="header-link" to="/basket">
                   Mon panier
                 </Link>
               </Nav.Link>
+              {props.user && props.user.isLogged && (
+                <Nav.Link>
+                  <Link className="header-link" to="/logout">
+                    Se deconnecter
+                  </Link>
+                </Nav.Link>
+              )}
             </Nav>
-          </Container>
-        </Navbar>
-      </header>
-    );
-  }
-}
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </header>
+  );
+};
 
 const mapDispatchToProps = {};
 
 const mapStateToProps = (store) => {
-  return {};
+  return { user: store.user };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

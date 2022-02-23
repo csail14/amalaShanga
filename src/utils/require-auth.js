@@ -5,6 +5,8 @@ import { config } from "../config";
 import axios from "axios";
 import { connect } from "react-redux";
 import { loadUserInfo } from "../actions/user/userActions";
+import { loadYogaInfo } from "../actions/yoga/yogaActions";
+import { getAllYoga } from "../utils/API/yogaApi";
 
 export default function (ChildComponent, withAuth = false, isAdmin = false) {
   class RequireAuth extends React.Component {
@@ -16,9 +18,22 @@ export default function (ChildComponent, withAuth = false, isAdmin = false) {
       };
     }
 
+    checkYogaClasse = () => {
+      if (
+        this.props.yogaClasses &&
+        this.props.yogaClasses.array &&
+        this.props.yogaClasses.array.length === 0
+      ) {
+        getAllYoga().then((res) => {
+          console.log(res.result);
+          this.props.loadYogaInfo(res.result);
+        });
+      }
+    };
     componentDidMount = async () => {
       const token = window.localStorage.getItem("AmalaToken");
-
+      console.log("token", token);
+      this.checkYogaClasse();
       if (token === null && withAuth) {
         this.setState({ redirect: true });
       } else {
@@ -60,12 +75,13 @@ export default function (ChildComponent, withAuth = false, isAdmin = false) {
 
   const mapDispatchToProps = {
     loadUserInfo,
+    loadYogaInfo,
   };
 
   const mapStateToProps = (store) => {
     return {
       user: store.user,
-      theme: store.theme,
+      yogaClasses: store.yogaClasses,
     };
   };
 

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import meditation from "../../assets/meditation.jpeg";
-
+import Button from "react-bootstrap/Button";
 const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-top: 100px;
   padding-bottom: 40px;
-  background-color: #9fc3d7;
   min-height: 96vh;
 `;
 
@@ -18,8 +20,7 @@ const TitleContainer = styled.p`
 
 const InfoContainer = styled.div`
   display: flex;
-  align-items: center;
-  margin: 0 50px;
+  justify-content: center;
 `;
 const TextContainer = styled.div`
   padding: 30px;
@@ -28,17 +29,20 @@ const TextContainer = styled.div`
 `;
 const Home = (props) => {
   return (
-    <MainContainer>
-      <TitleContainer>
-        Ici lien vers la meditation tous les lundi à 19h
-      </TitleContainer>
+    <MainContainer
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)), url(${meditation})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <TitleContainer>Suivez la méditation du mois</TitleContainer>
       <InfoContainer>
-        <img
-          style={{ borderRadius: "12px", maxHeight: "400px", margin: "40px" }}
-          src={meditation}
-          alt="meditation_illu"
-        />
-        <TextContainer>Lien ici</TextContainer>
+        <TextContainer>
+          <Button id="primary-btn" variant="primary">
+            Je medite
+          </Button>
+        </TextContainer>
       </InfoContainer>
     </MainContainer>
   );
