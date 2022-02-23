@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { FaTrash, FaPen } from "react-icons/fa";
+import { useMediaQuery } from "react-responsive";
 
 const SubTitleContainer = styled.p`
   color: grey;
@@ -12,9 +13,10 @@ const SubTitleContainer = styled.p`
 
 const InfoContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   background: #f8f9fa;
-  margin: 10px 50px;
+  margin: ${(props) => (props.isMobile ? "" : "10px 50px")};
   color: white;
   border: 0.5px solid white;
   border-radius: 12px;
@@ -29,15 +31,18 @@ const InfoDetailsContainer = styled.div`
 `;
 const AllInfoDetailsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   border-radius: 12px;
   background-color: white;
   margin: 5px 0;
   color: grey;
   border: 0.5px solid grey;
 `;
+
 const Activities = (props) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   return (
-    <InfoContainer>
+    <InfoContainer isMobile={isMobile}>
       <SubTitleContainer>Les activités </SubTitleContainer>
       <AllInfoDetailsContainer className="onHoverIsBorderGrey">
         <InfoDetailsContainer>

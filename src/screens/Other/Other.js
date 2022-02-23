@@ -5,9 +5,10 @@ import imageFond3 from "../../assets/imageFond3.jpeg";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
-  padding-top: 100px;
+  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
 `;
@@ -22,14 +23,16 @@ const InfoContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-
+  flex-wrap: wrap;
   margin: 0 50px;
 `;
 
 const Other = (props) => {
   let history = useHistory();
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
+
   return (
-    <MainContainer>
+    <MainContainer isMobile={isMobile}>
       <TitleContainer>
         Voici la liste des cours de yoga mis à disposition
       </TitleContainer>

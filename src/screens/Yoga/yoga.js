@@ -6,9 +6,10 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ModalAddToBasket from "./addBasketModal";
 import { addInBasket } from "../../actions/basket/basketActions";
+import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
-  padding-top: 100px;
+  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
 `;
@@ -32,10 +33,11 @@ const Yoga = (props) => {
 
   const handleShowModal = () => setShowAddToBasketModal(true);
   const handleCloseModal = () => setShowAddToBasketModal(false);
-
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   const buyClasses = (item) => {
     const isLogged = props.user && props.user.isLogged;
     const isMember = isLogged && props.user.infos && props.user.infos.isMember;
+    props.addInBasket(item);
     if (isLogged && isMember) {
       props.addInBasket(item);
       handleShowModal();
@@ -45,7 +47,7 @@ const Yoga = (props) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer isMobile={isMobile}>
       <TitleContainer>
         Voici la liste des cours de yoga mis à disposition
       </TitleContainer>

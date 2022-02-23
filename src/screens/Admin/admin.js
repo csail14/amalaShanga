@@ -6,9 +6,10 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Classes from "./TabComponent/Yoga/classes";
 import Activites from "./TabComponent/activities";
+import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
-  padding-top: 100px;
+  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
 `;
@@ -20,8 +21,9 @@ const TitleContainer = styled.p`
 `;
 
 const Home = (props) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   return (
-    <MainContainer>
+    <MainContainer isMobile={isMobile}>
       <TitleContainer>Bienvenue sur votre page admin </TitleContainer>
       <Tabs
         defaultActiveKey="profile"

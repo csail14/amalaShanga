@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import ReCAPTCHA from "react-google-recaptcha";
 import { addUser } from "../../utils/API/userApi";
 import Fond3 from "../../assets/imageFond3.jpeg";
+import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
   padding-top: 100px;
@@ -31,7 +32,7 @@ const InfoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 450px;
+  margin: ${(props) => (props.isMobile ? "0px" : "0 450px")};
   color: white;
   background-color: rgb(255, 255, 255, 0.5);
   border: 0.5px solid white;
@@ -59,7 +60,7 @@ const Home = (props) => {
   const [success, setSuccess] = useState(false);
   const [isCaptchaVerified, setCaptchaVerified] = useState(false);
   const [isUserCreated, setIsUserCreated] = useState(false);
-
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   const handleChange = (type, value) => {
     switch (type) {
       case "lastName":
@@ -146,7 +147,7 @@ const Home = (props) => {
         tarif préferentiel de 9 euros par cours, et d'acceder gratuitement à la
         méditation en ligne hebdomadaire.
       </SubTitleContainer>
-      <InfoContainer>
+      <InfoContainer isMobile={isMobile}>
         {!success && (
           <Form>
             <Form.Group className="mb-3" controlId="formBasic">

@@ -9,9 +9,10 @@ import { loginUser, getUserById } from "../../utils/API/userApi";
 import { loadUserInfo } from "../../actions/user/userActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Fond3 from "../../assets/imageFond3.jpeg";
+import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
-  padding-top: 100px;
+  padding-top: ${(props) => (props.isMobile ? "100px" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
 `;
@@ -40,7 +41,7 @@ const InfoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 450px;
+  margin: ${(props) => (props.isMobile ? "10px" : "0 450px")};
   background-color: rgb(255, 255, 255, 0.5);
   color: white;
   border: 0.5px solid white;
@@ -53,7 +54,7 @@ const Home = (props) => {
   const [password, setPassword] = useState("");
   const [error, seterrorMessage] = useState("");
   const [redirect, setRedirect] = useState(false);
-
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   const storeData = async (token) => {
     try {
       await AsyncStorage.setItem("AmalaToken", token);
@@ -93,6 +94,7 @@ const Home = (props) => {
 
   return (
     <MainContainer
+      isMobile={isMobile}
       style={{
         backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Fond3})`,
         backgroundSize: "cover",
@@ -103,7 +105,7 @@ const Home = (props) => {
       <TitleContainer>
         Connectez-vous à votre compte Amala Sangha pour accéder à vos contenus
       </TitleContainer>
-      <InfoContainer>
+      <InfoContainer isMobile={isMobile}>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label style={{ color: "#625454" }}>Adresse Email</Form.Label>

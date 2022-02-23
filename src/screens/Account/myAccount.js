@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import fred from "../../assets/fred.jpeg";
+
 const MainContainer = styled.div`
   padding-top: 100px;
   padding-bottom: 40px;
@@ -25,9 +27,10 @@ const SubTitleContainer = styled.p`
 
 const InfoContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   background: #f8f9fa;
-  margin: 10px 50px;
+  margin: ${(props) => (props.isMobile ? "20px" : "10px 50px")};
   color: white;
   border: 0.5px solid white;
   border-radius: 12px;
@@ -42,6 +45,7 @@ const InfoDetailsContainer = styled.div`
 const AllInfoDetailsContainer = styled.div`
   text-decoration: none;
   display: flex;
+  flex-wrap: wrap;
   border-radius: 12px;
   background-color: white;
   margin: 5px 0;
@@ -50,13 +54,14 @@ const AllInfoDetailsContainer = styled.div`
 `;
 const MyAccount = (props) => {
   const userDetails = props.user && props.user.infos;
-  console.log(userDetails);
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
+
   return (
     <MainContainer>
       <TitleContainer>
         Bienvenue {userDetails && userDetails.firstName}{" "}
       </TitleContainer>
-      <InfoContainer>
+      <InfoContainer isMobile={isMobile}>
         <SubTitleContainer>Mes informations </SubTitleContainer>
         <AllInfoDetailsContainer style={{ justifyContent: "center" }}>
           <img
@@ -90,7 +95,14 @@ const MyAccount = (props) => {
             </InfoDetailsContainer>
           </div>
         </AllInfoDetailsContainer>
-        <div style={{ display: "flex", margin: "20px auto 10px auto" }}>
+        <div
+          style={{
+            display: "flex",
+            margin: isMobile ? "auto" : "20px auto 10px auto",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
           <Button
             variant="primary"
             type="submit"
@@ -110,11 +122,11 @@ const MyAccount = (props) => {
               border: "0",
             }}
           >
-            Mettre à jour ma cotisation
+            Devenir membre
           </Button>
         </div>
       </InfoContainer>
-      <InfoContainer>
+      <InfoContainer isMobile={isMobile}>
         <SubTitleContainer>Mes cours ou activités </SubTitleContainer>
         <Link to="studio">
           <AllInfoDetailsContainer className="onHoverIsGrey">

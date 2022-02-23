@@ -9,9 +9,10 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { MdEuroSymbol } from "react-icons/md";
 import { GoHome, GoLocation, GoTriangleRight } from "react-icons/go";
 import Button from "react-bootstrap/Button";
+import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
-  padding-top: 100px;
+  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
   padding-bottom: 40px;
 `;
 
@@ -42,12 +43,13 @@ const TextContainer = styled.div`
 
 const ArticleContainer = styled.div`
   color: black;
-  padding: 30px 80px;
+  padding: ${(props) => (props.isMobile ? "30px 30px 0 30px" : "30px 80px")};
   text-align: justify;
 `;
 
 const Content = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 const SideBar = styled.div`
   color: black;
@@ -62,9 +64,16 @@ const Date = styled.div`
   margin: 20px 0;
   align-items: center;
 `;
-const Other = (props) => {
+
+const PageContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const Other = () => {
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   return (
-    <div>
+    <PageContainer isMobile={isMobile}>
       <Fade arrows={false} easing="ease" autoplay={false}>
         <div className="each-slide">
           <div
@@ -79,7 +88,7 @@ const Other = (props) => {
               marginTop: 90,
             }}
           >
-            <MainContainer>
+            <MainContainer isMobile={isMobile}>
               <TitleContainer>
                 Retraite de Yoga en Auvergne
                 <SubTitleContainer>
@@ -97,7 +106,7 @@ const Other = (props) => {
         </div>
       </Fade>
       <Content>
-        <ArticleContainer>
+        <ArticleContainer isMobile={isMobile}>
           Le yoga n’est pas une simple « gymnastique douce ». La pratique des
           postures ou asanas, s’inscrit dans une vaste philosophie de vie dont
           nous explorons les fondamentaux tout en marchant dans la belle nature
@@ -200,7 +209,7 @@ const Other = (props) => {
           </Date>
         </SideBar>
       </Content>
-    </div>
+    </PageContainer>
   );
 };
 

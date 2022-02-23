@@ -7,6 +7,7 @@ import {
   deleteInBasket,
 } from "../../actions/basket/basketActions";
 import { FaTrash } from "react-icons/fa";
+import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
   padding-top: 100px;
@@ -22,7 +23,7 @@ const BasketContainer = styled.div`
   border-radius: 12px;
   margin: auto;
   margin-top: 30px;
-  max-width: 50%;
+  max-width: ${(props) => (props.isMobile ? "90%" : "50%")};
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
 `;
 
@@ -47,8 +48,6 @@ const ButtonContainer = styled.div`
 `;
 
 const Basket = (props) => {
-  console.log("basket", props.basket);
-
   const calculTotalPrice = () => {
     let price = 0;
     props.basket &&
@@ -58,12 +57,13 @@ const Basket = (props) => {
       });
     return price;
   };
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
 
   return (
     <MainContainer>
       {/* <TitleContainer>Votre panier</TitleContainer> */}
       {props.basket && props.basket.products && (
-        <BasketContainer>
+        <BasketContainer isMobile={isMobile}>
           <BasketTitle>
             {props.basket.products.length === 0
               ? "Votre panier est vide"

@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import ModalAddClasses from "./ModalAddClasses";
 import ModalEditClasses from "./ModalEditClasses";
 import ModalDeleteClasses from "./ModalDeleteClasses";
+import { useMediaQuery } from "react-responsive";
 
 const SubTitleContainer = styled.p`
   color: grey;
@@ -16,10 +17,11 @@ const SubTitleContainer = styled.p`
 
 const InfoContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   min-height: 96vh;
   flex-direction: column;
   background: #f8f9fa;
-  margin: 10px 50px;
+  margin: ${(props) => (props.isMobile ? "" : "10px 50px")};
   color: white;
   border: 0.5px solid white;
   border-radius: 12px;
@@ -34,6 +36,7 @@ const InfoDetailsContainer = styled.div`
 
 const AllInfoDetailsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   border-radius: 12px;
   background-color: white;
@@ -62,9 +65,9 @@ const Classes = (props) => {
     setShowDelete(true);
     setDeleteItem(item);
   };
-  console.log(props.yogaClasses);
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   return (
-    <InfoContainer>
+    <InfoContainer isMobile={isMobile}>
       <Button
         onClick={handleShowAdd}
         style={{ width: "fit-content", margin: "5px", margin: " 0 auto" }}

@@ -6,14 +6,14 @@ import {
   cleanBasket,
   deleteInBasket,
 } from "../../actions/basket/basketActions";
-import { FaTrash } from "react-icons/fa";
+import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 100px;
+  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
 `;
@@ -30,23 +30,24 @@ const BasketContainer = styled.div`
   padding: 30px;
   background-color: white;
   border-radius: 12px;
-  max-width: 50%;
+  max-width: ${(props) => (props.isMobile ? "" : "50%")};
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
 `;
 
 const Studio = (props) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   const classes =
     props.yogaClasses &&
     props.yogaClasses.array.length &&
     props.yogaClasses.array[0];
 
   return (
-    <MainContainer>
+    <MainContainer isMobile={isMobile}>
       <TitleContainer>{classes && classes.name}</TitleContainer>
-      <BasketContainer>
+      <BasketContainer isMobile={isMobile}>
         <iframe
-          width="650px"
-          height="400px"
+          width={isMobile ? "100%" : "650px"}
+          height={isMobile ? "100%" : "400px"}
           src="https://www.youtube.com/embed/V9pUqcU1VcQ"
           title="YouTube video player"
           frameborder="10"
