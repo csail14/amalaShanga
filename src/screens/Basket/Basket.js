@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import {
   cleanBasket,
   deleteInBasket,
@@ -48,6 +49,8 @@ const ButtonContainer = styled.div`
 `;
 
 const Basket = (props) => {
+  let history = useHistory();
+
   const calculTotalPrice = () => {
     let price = 0;
     props.basket &&
@@ -56,6 +59,10 @@ const Basket = (props) => {
         price = price + element.price;
       });
     return price;
+  };
+
+  const goToPay = () => {
+    history.push("/paiement");
   };
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
 
@@ -92,7 +99,7 @@ const Basket = (props) => {
               </Product>
 
               <ButtonContainer>
-                <Button variant="primary" onClick={props.cleanBasket}>
+                <Button variant="primary" onClick={goToPay}>
                   Finaliser l'achat
                 </Button>
                 <Button variant="outline-primary" onClick={props.cleanBasket}>

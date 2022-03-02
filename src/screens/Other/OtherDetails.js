@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import "react-slideshow-image/dist/styles.css";
 import { Fade } from "react-slideshow-image";
-import stageAuvergne1 from "../../assets/stageAuvergne1.jpeg";
-import yoga_default_image from "../../assets/yoga_default_image.jpeg";
+import stageAuvergne1 from "../../assets/stageAuvergne1.jpg";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { MdEuroSymbol } from "react-icons/md";
 import { GoHome, GoLocation, GoTriangleRight } from "react-icons/go";
 import Button from "react-bootstrap/Button";
 import { useMediaQuery } from "react-responsive";
+import ModalSubscribe from "./ModalSubscribe";
+import SentSubscribeModal from "./SentSubscribeModal";
 
 const MainContainer = styled.div`
   padding-top: ${(props) => (props.isMobile ? "" : "100px")};
@@ -49,7 +50,7 @@ const ArticleContainer = styled.div`
 
 const Content = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: ${(props) => (props.isMobile ? "wrap" : "")};
 `;
 const SideBar = styled.div`
   color: black;
@@ -65,15 +66,19 @@ const Date = styled.div`
   align-items: center;
 `;
 
-const PageContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
 const Other = () => {
+  const [showModal, setShowModal] = useState(false);
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
+  const handleClose = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+
+  const [showModalValidation, setShowModalValidation] = useState(false);
+
+  const handleCloseValidation = () => setShowModalValidation(false);
+  const handleShowModalValidation = () => setShowModalValidation(true);
+
   return (
-    <PageContainer isMobile={isMobile}>
+    <div isMobile={isMobile}>
       <Fade arrows={false} easing="ease" autoplay={false}>
         <div className="each-slide">
           <div
@@ -84,7 +89,7 @@ const Other = () => {
               maxHeight: "50%",
               backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)), url(${stageAuvergne1})`,
               backgroundSize: "cover",
-              backgroundPosition: "center -475px",
+              backgroundPosition: isMobile ? "center" : "center -591px",
               marginTop: 90,
             }}
           >
@@ -105,7 +110,7 @@ const Other = () => {
           </div>
         </div>
       </Fade>
-      <Content>
+      <Content isMobile={isMobile}>
         <ArticleContainer isMobile={isMobile}>
           Le yoga n’est pas une simple « gymnastique douce ». La pratique des
           postures ou asanas, s’inscrit dans une vaste philosophie de vie dont
@@ -162,7 +167,7 @@ const Other = () => {
         </ArticleContainer>
         <SideBar>
           {" "}
-          <Button id="primary-btn" variant="primary" onClick={() => {}}>
+          <Button id="primary-btn" variant="primary" onClick={handleShowModal}>
             Je m'inscris
           </Button>
           <Date>
@@ -209,7 +214,18 @@ const Other = () => {
           </Date>
         </SideBar>
       </Content>
-    </PageContainer>
+      <ModalSubscribe
+        show={showModal}
+        handleClose={handleClose}
+        handleShow={handleShowModal}
+        handleShowModalValidation={handleShowModalValidation}
+      />
+      <SentSubscribeModal
+        show={showModalValidation}
+        handleClose={handleCloseValidation}
+        handleShow={handleShowModalValidation}
+      />
+    </div>
   );
 };
 

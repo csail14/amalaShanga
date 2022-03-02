@@ -60,8 +60,8 @@ const Header = (props) => {
                 </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link className="header-link" to="/other">
-                  Autres activités
+                <Link className="header-link" to="/stage">
+                  Stages
                 </Link>
               </Nav.Link>
             </Nav>
@@ -89,8 +89,26 @@ const Header = (props) => {
               )}
 
               <Nav.Link>
-                <Link className="header-link" to="/basket">
-                  Mon panier
+                <Link
+                  className="header-link"
+                  to="/basket"
+                  style={{ flexWrap: "nowrap" }}
+                >
+                  Mon panier{" "}
+                  {props.basket.products.length > 0 ? (
+                    <bold
+                      style={{
+                        border: "2px solid black",
+                        padding: "2px 8px",
+                        borderRadius: "50%",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {props.basket.products.length}
+                    </bold>
+                  ) : (
+                    ""
+                  )}
                 </Link>
               </Nav.Link>
               {props.user && props.user.isLogged && (
@@ -111,7 +129,7 @@ const Header = (props) => {
 const mapDispatchToProps = {};
 
 const mapStateToProps = (store) => {
-  return { user: store.user };
+  return { user: store.user, basket: store.basket };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
