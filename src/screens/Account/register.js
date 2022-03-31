@@ -203,7 +203,7 @@ const Home = (props) => {
                 Date de naissance JJ/MM/AA
               </Form.Label>
               <Form.Control
-                type="text"
+                type="date"
                 onChange={(e) => handleChange("birthDate", e.target.value)}
                 placeholder="Entrer votre date de naissance"
               />

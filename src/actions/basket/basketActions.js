@@ -1,7 +1,6 @@
 import { ADD_IN_BASKET, DELETE_IN_BASKET, CLEAN_BASKET } from "./action-type";
 
 export const addInBasket = (product) => {
-  console.log("ajout de", product);
   return function (dispatch) {
     dispatch({
       type: ADD_IN_BASKET,

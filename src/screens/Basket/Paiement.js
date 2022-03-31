@@ -61,13 +61,19 @@ const Paiement = (props) => {
   let history = useHistory();
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    createPaiement(JSON.stringify({ items: [{ id: "xl-tshirt" }] })).then(
-      (data) => {
-        setClientSecret(data.data.clientSecret);
-      }
-    );
-  }, []);
+    const items =
+      props.basket &&
+      props.basket.products &&
+      props.basket.products.map((product) => {
+        return { id: product.id };
+      });
+    createPaiement({
+      items,
+      user_id: props.user && props.user.infos && props.user.infos.id,
+    }).then((data) => {
+      setClientSecret(data.data && data.data.clientSecret);
+    });
+  }, [props.basket]);
 
   const appearance = {
     theme: "stripe",
@@ -94,7 +100,6 @@ const Paiement = (props) => {
 
   return (
     <MainContainer>
-      {/* <TitleContainer>Votre panier</TitleContainer> */}
       {props.basket && props.basket.products && (
         <BasketContainer isMobile={isMobile}>
           <BasketTitle>
@@ -140,7 +145,7 @@ const Paiement = (props) => {
         <BasketTitle>Paiement par carte bancaire</BasketTitle>
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm clientSecret={clientSecret} />
           </Elements>
         )}
       </BasketContainer>
@@ -151,7 +156,7 @@ const Paiement = (props) => {
 const mapDispatchToProps = { cleanBasket, deleteInBasket };
 
 const mapStateToProps = (store) => {
-  return { basket: store.basket };
+  return { basket: store.basket, user: store.user };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Paiement);

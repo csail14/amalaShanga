@@ -20,7 +20,6 @@ const ModalSubscribe = (props) => {
       url: url,
       isAvailable: isAvailable,
     };
-    console.log(data);
   };
 
   return (

@@ -26,7 +26,7 @@ const Home = (props) => {
     <MainContainer isMobile={isMobile}>
       <TitleContainer>Bienvenue sur votre page admin </TitleContainer>
       <Tabs
-        defaultActiveKey="profile"
+        defaultActiveKey="home"
         id="uncontrolled-tab-example"
         className="mb-3"
       >

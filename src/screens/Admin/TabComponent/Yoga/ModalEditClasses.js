@@ -6,7 +6,6 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 const ModalEditClasses = (props) => {
-  console.log("props", props);
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
@@ -34,7 +33,6 @@ const ModalEditClasses = (props) => {
     };
     editYoga(data, props.editItem.id)
       .then((res) => {
-        console.log(res);
         if (res.data.status === 200) {
           props.handleClose();
           window.location.reload();

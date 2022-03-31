@@ -18,7 +18,7 @@ import Logout from "./screens/Account/logout";
 import Basket from "./screens/Basket/Basket";
 import Studio from "./screens/Studio/Studio";
 import Stage1 from "./screens/Other/OtherDetails";
-
+import PaymentSuceed from "./screens/Basket/PaymentSucced";
 function App() {
   const location = useLocation();
 
@@ -55,6 +55,11 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/Register" component={Register} />
           <Route exact path="/stage" component={Stage1} />
+          <Route
+            exact
+            path="/paiement-succeed"
+            component={RequireAuth(PaymentSuceed, false)}
+          />
           <Route exact path="/paiement" component={Paiment} />
           <Route exact path="/admin" component={RequireAuth(Admin, false)} />
           <Route exact path="/logout" component={Logout} />

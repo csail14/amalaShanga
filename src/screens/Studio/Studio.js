@@ -36,11 +36,12 @@ const BasketContainer = styled.div`
 
 const Studio = (props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
+  const url =
+    props.location && props.location.state && props.location.state.url;
   const classes =
     props.yogaClasses &&
     props.yogaClasses.array.length &&
     props.yogaClasses.array[0];
-
   return (
     <MainContainer isMobile={isMobile}>
       <TitleContainer>{classes && classes.name}</TitleContainer>
@@ -48,7 +49,7 @@ const Studio = (props) => {
         <iframe
           width={isMobile ? "100%" : "650px"}
           height={isMobile ? "100%" : "400px"}
-          src="https://www.youtube.com/embed/V9pUqcU1VcQ"
+          src={url}
           title="YouTube video player"
           frameborder="10"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen;"

@@ -5,6 +5,7 @@ import { FaTrash, FaPen } from "react-icons/fa";
 
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import YogaOrders from "./YogaOrders/yogaOrders";
 const SubTitleContainer = styled.p`
   color: grey;
   font-weight: 700;
@@ -39,13 +40,14 @@ const AllInfoDetailsContainer = styled.div`
 const Orders = (props) => {
   return (
     <Tabs
-      defaultActiveKey="profile"
+      defaultActiveKey="home"
       id="uncontrolled-tab-example"
       className="mb-3"
     >
-      <Tab eventKey="home" title="Cours"></Tab>
+      <Tab eventKey="home" title="Cours">
+        <YogaOrders />
+      </Tab>
       <Tab eventKey="profile" title="Autres activités"></Tab>
-      <Tab eventKey="contact" title="Commandes" disabled></Tab>
     </Tabs>
   );
 };

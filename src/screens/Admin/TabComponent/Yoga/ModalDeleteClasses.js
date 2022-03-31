@@ -10,8 +10,6 @@ const TitleContainer = styled.p`
 `;
 
 const ModalAddClasses = (props) => {
-  console.log(props.deleteItem);
-
   const deleteItem = () => {
     deleteYogaById(props.deleteItem.id)
       .then((res) => {

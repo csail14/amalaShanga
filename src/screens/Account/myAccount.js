@@ -4,7 +4,12 @@ import { connect } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
-import fred from "../../assets/fred.jpeg";
+import { getOrderByClient } from "../../utils/API/orderApi";
+import moment from "moment";
+import ModifyPersonalInfoModal from "./modifyPersonalInfoModal";
+import CotisationoModal from "./cotisationModal";
+import { isMemberCheck } from "../../service/userService";
+require("moment/locale/fr.js");
 
 const MainContainer = styled.div`
   padding-top: 100px;
@@ -53,9 +58,26 @@ const AllInfoDetailsContainer = styled.div`
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
 `;
 const MyAccount = (props) => {
+  const [orderDetails, setOrderDetails] = useState(null);
+  const [showModifyInfoModal, setShowModifyInfoModal] = useState(null);
+  const [showCotisationModal, setShowCotisationModal] = useState(null);
   const userDetails = props.user && props.user.infos;
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
 
+  const handleShowInfoModal = () => setShowModifyInfoModal(true);
+  const handleCloseInfoModal = () => setShowModifyInfoModal(false);
+  const handleShowCotisationModal = () => setShowCotisationModal(true);
+  const handleCloseCotisationModal = () => setShowCotisationModal(false);
+
+  const isMember = isMemberCheck(props.user);
+
+  useEffect(() => {
+    getOrderByClient(userDetails && userDetails.id)
+      .then((res) => {
+        setOrderDetails(res.data.results);
+      })
+      .catch((error) => console.log(error));
+  }, [userDetails]);
   return (
     <MainContainer>
       <TitleContainer>
@@ -64,7 +86,7 @@ const MyAccount = (props) => {
       <InfoContainer isMobile={isMobile}>
         <SubTitleContainer>Mes informations </SubTitleContainer>
         <AllInfoDetailsContainer style={{ justifyContent: "center" }}>
-          <img
+          {/* <img
             style={{
               borderRadius: "50%",
               maxHeight: "200px",
@@ -72,7 +94,7 @@ const MyAccount = (props) => {
             }}
             src={fred}
             alt="home_illu"
-          />
+          /> */}
           <div>
             <InfoDetailsContainer>
               <b>Nom :</b> {userDetails && userDetails.lastName}
@@ -90,7 +112,7 @@ const MyAccount = (props) => {
             <InfoDetailsContainer>
               <b>Date de naissance :</b>{" "}
               {userDetails && userDetails.birthdate
-                ? new Date(userDetails.birthdate)
+                ? moment(userDetails.birthdate).format("LL")
                 : "Non renseignée"}
             </InfoDetailsContainer>
           </div>
@@ -108,85 +130,65 @@ const MyAccount = (props) => {
             type="submit"
             id="primary-btn"
             style={{ width: "fit-content", margin: "5px" }}
+            onClick={handleShowInfoModal}
           >
             Modifier mes informations
           </Button>
-          <Button
-            variant="primary"
-            type="submit"
-            id="primary-btn"
-            style={{
-              width: "fit-content",
-              margin: "5px",
-              backgroundColor: "#a4d5ff6b",
-              border: "0",
-            }}
-          >
-            Devenir membre
-          </Button>
+          {!isMember && (
+            <Button
+              variant="primary"
+              type="submit"
+              id="primary-btn"
+              style={{
+                width: "fit-content",
+                margin: "5px",
+                backgroundColor: "#a4d5ff6b",
+                border: "0",
+              }}
+              onClick={handleShowCotisationModal}
+            >
+              Devenir membre
+            </Button>
+          )}
         </div>
       </InfoContainer>
       <InfoContainer isMobile={isMobile}>
         <SubTitleContainer>Mes cours ou activités </SubTitleContainer>
-        <Link to="studio">
-          <AllInfoDetailsContainer className="onHoverIsGrey">
-            <InfoDetailsContainer>
-              <b>Nom :</b> Cours du 21 octobre
-            </InfoDetailsContainer>
-            <InfoDetailsContainer>
-              <b>Date d'achat :</b> 30 Octobre 2021
-            </InfoDetailsContainer>
-            <InfoDetailsContainer>
-              <b>Lien :</b> http://monlien.fr
-            </InfoDetailsContainer>
-            <InfoDetailsContainer>
-              <b>Valide jusqu'au :</b> date
-            </InfoDetailsContainer>
-          </AllInfoDetailsContainer>
-        </Link>
-        <AllInfoDetailsContainer className="onHoverIsGrey">
-          <InfoDetailsContainer>
-            <b>Nom :</b> Cours du 21 octobre
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Date d'achat :</b> 30 Octobre 2021
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Lien :</b> http://monlien.fr
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Valide jusqu'au :</b> date
-          </InfoDetailsContainer>
-        </AllInfoDetailsContainer>
-        <AllInfoDetailsContainer className="onHoverIsGrey">
-          <InfoDetailsContainer>
-            <b>Nom :</b> Cours du 21 octobre
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Date d'achat :</b> 30 Octobre 2021
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Lien :</b> http://monlien.fr
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Valide jusqu'au :</b> date
-          </InfoDetailsContainer>
-        </AllInfoDetailsContainer>
-        <AllInfoDetailsContainer className="onHoverIsGrey">
-          <InfoDetailsContainer>
-            <b>Nom :</b> Cours du 21 octobre
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Date d'achat :</b> 30 Octobre 2021
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Lien :</b> http://monlien.fr
-          </InfoDetailsContainer>
-          <InfoDetailsContainer>
-            <b>Valide jusqu'au :</b> date
-          </InfoDetailsContainer>
-        </AllInfoDetailsContainer>
+        {orderDetails &&
+          orderDetails.map((order) => {
+            return (
+              <Link
+                to={{
+                  pathname: "studio",
+                  state: { url: order && order.details && order.details.url },
+                }}
+              >
+                <AllInfoDetailsContainer className="onHoverIsGrey">
+                  <InfoDetailsContainer>
+                    <b>Nom :</b> {order && order.details && order.details.name}
+                  </InfoDetailsContainer>
+                  <InfoDetailsContainer>
+                    <b>Date d'achat :</b>{" "}
+                    {moment(order && order.creation_date).format("LL")}
+                  </InfoDetailsContainer>
+                  <InfoDetailsContainer>
+                    <b>Valide jusqu'au :</b> date
+                  </InfoDetailsContainer>
+                </AllInfoDetailsContainer>
+              </Link>
+            );
+          })}
       </InfoContainer>
+      <ModifyPersonalInfoModal
+        show={showModifyInfoModal}
+        handleClose={handleCloseInfoModal}
+        handleShow={handleShowInfoModal}
+      />
+      <CotisationoModal
+        show={showCotisationModal}
+        handleClose={handleShowCotisationModal}
+        handleShow={handleCloseCotisationModal}
+      />
     </MainContainer>
   );
 };

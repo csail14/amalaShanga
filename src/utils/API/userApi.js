@@ -16,9 +16,12 @@ export const addUser = (body) => {
     });
 };
 
-export const setUser = (body) => {
+export const setUser = (body, id) => {
   return axios
-    .post(config.api_url + "api/", { body: body, headers: headers })
+    .put(config.api_url + "api/v1/user/set/" + id, {
+      body: body,
+      headers: headers,
+    })
     .then((response) => {
       return response;
     })

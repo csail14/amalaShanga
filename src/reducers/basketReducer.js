@@ -9,7 +9,6 @@ const initialState = {
 };
 
 const BasketReducer = (state = initialState, action) => {
-  console.log("new product", action.payload);
   switch (action.type) {
     case ADD_IN_BASKET:
       return {

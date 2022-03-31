@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ModalAddToBasket from "./addBasketModal";
 import { addInBasket } from "../../actions/basket/basketActions";
+import { getOrderByClientByProduct } from "../../utils/API/orderApi";
 import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
@@ -30,20 +31,42 @@ const InfoContainer = styled.div`
 
 const Yoga = (props) => {
   const [showAddToBasketModal, setShowAddToBasketModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const handleShowModal = () => setShowAddToBasketModal(true);
   const handleCloseModal = () => setShowAddToBasketModal(false);
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   const buyClasses = (item) => {
-    const isLogged = props.user && props.user.isLogged;
-    const isMember = isLogged && props.user.infos && props.user.infos.isMember;
-    props.addInBasket(item);
-    if (isLogged && isMember) {
-      props.addInBasket(item);
-      handleShowModal();
-    } else {
-      handleShowModal();
-    }
+    getOrderByClientByProduct(props.user.infos.id, item.id).then((res) => {
+      const isAlreadyBuy =
+        res && res.data && res.data.result && res.data.result.length > 0;
+      const isLogged = props.user && props.user.isLogged;
+      const isMember =
+        isLogged && props.user.infos && props.user.infos.isMember;
+      const isAlreadyInBasket =
+        props.basket &&
+        props.basket.products &&
+        props.basket.products.includes(item);
+      if (!isLogged) {
+        setModalMessage("Vous devez vous connecter pour acheter un cours.");
+      } else if (!isMember) {
+        setModalMessage("Vous devez etre membre pour acheter un cours.");
+      } else if (isAlreadyInBasket) {
+        setModalMessage("Ce cours est déjà dans votre panier.");
+      } else if (isAlreadyBuy) {
+        setModalMessage(
+          "Vous avez déjà acheté ce cours. Rendez vous dans la rubrique 'Mon compte' pour le consulter."
+        );
+      } else {
+        setModalMessage("Votre cours a bien été ajouté au panier.");
+      }
+      if (isLogged && isMember && !isAlreadyBuy & !isAlreadyInBasket) {
+        props.addInBasket(item);
+        handleShowModal();
+      } else {
+        handleShowModal();
+      }
+    });
   };
 
   return (
@@ -93,6 +116,7 @@ const Yoga = (props) => {
         show={showAddToBasketModal}
         handleClose={handleCloseModal}
         handleShow={handleShowModal}
+        modalMessage={modalMessage}
       />
     </MainContainer>
   );
@@ -101,7 +125,11 @@ const Yoga = (props) => {
 const mapDispatchToProps = { addInBasket };
 
 const mapStateToProps = (store) => {
-  return { yogaClasses: store.yogaClasses, user: store.user };
+  return {
+    yogaClasses: store.yogaClasses,
+    user: store.user,
+    basket: store.basket,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Yoga);

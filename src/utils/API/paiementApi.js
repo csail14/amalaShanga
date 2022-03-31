@@ -13,7 +13,6 @@ export const createPaiement = (body) => {
       headers: headers,
     })
     .then((response) => {
-      console.log("response", response);
       return response;
     })
     .catch((err) => {

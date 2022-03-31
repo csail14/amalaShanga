@@ -67,6 +67,11 @@ a {
   color: #61dafb;
 }
 
+#submit {
+  padding: 10px;
+  border-radius: 12px;
+}
+
 .header-link {
   text-decoration: none;
   color: grey;

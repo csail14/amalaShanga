@@ -3,26 +3,50 @@ import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import SentSubscribeModal from "./SentSubscribeModal";
+import { subscribeStage } from "../../utils/API/mailApi";
 
 const ModalSubscribe = (props) => {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
-  const [url, setUrl] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [transport, setTransport] = useState("");
+  const [room, setRoom] = useState("Chambre double 300€");
+  const [comments, setComments] = useState("");
+  const [error, setError] = useState("");
 
-  const [isAvailable, setIsAvailable] = useState(true);
+  const stageTitle = "Stage Yoga Juillet";
 
   const submit = () => {
     let data = {
-      name: name,
-      description: description,
-      price: price,
-      url: url,
-      isAvailable: isAvailable,
+      lastName: lastName,
+      firstName: firstName,
+      stageTitle: stageTitle,
+      email: email,
+      transport: transport,
+      room: room,
+      comments: comments,
     };
-    props.handleClose();
-    props.handleShowModalValidation();
+    if (
+      lastName === "" ||
+      firstName === "" ||
+      email === "" ||
+      transport === ""
+    ) {
+      setError("Veuillez remplir tous les champs marqués d'une astérisque");
+    } else {
+      subscribeStage(data)
+        .then((res) => {
+          setError("");
+          if (res.status === 200) {
+            console.log(res);
+            props.handleClose();
+            props.handleShowModalValidation();
+          } else {
+            setError("Une erreur s'est produite");
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   return (
@@ -37,14 +61,14 @@ const ModalSubscribe = (props) => {
             <Form.Control
               type="text"
               required
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setLastName(e.target.value)}
               placeholder="Entrer votre nom *"
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Prénom</Form.Label>
             <Form.Control
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
               type="text"
               placeholder="Entrer votre prénom *"
             />
@@ -52,7 +76,7 @@ const ModalSubscribe = (props) => {
           <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
             <Form.Control
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               placeholder="Entrer votre email * "
             />
@@ -60,7 +84,7 @@ const ModalSubscribe = (props) => {
           <Form.Group className="mb-3">
             <Form.Control
               as="textarea"
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => setTransport(e.target.value)}
               rows={3}
               placeholder="Précisez ici comment vous vous rendez sur le lieu du stage *"
             />
@@ -68,23 +92,26 @@ const ModalSubscribe = (props) => {
           <Form.Group className="mb-3">
             <Form.Label>Votre chambre</Form.Label>
             <Form.Select
-              onChange={(e) => setIsAvailable(e.target.value)}
+              onChange={(e) => setRoom(e.target.value)}
               aria-label="Default select example"
             >
-              <option value={false}>Chambre double 300€</option>
-              <option value={false}>Chambre en dortoir 275€</option>
-              <option value={true}>Chambre seule 400€</option>
+              <option value={"Chambre double 300€"}>Chambre double 300€</option>
+              <option value={"Chambre en dortoir 275€"}>
+                Chambre en dortoir 275€
+              </option>
+              <option value={"Chambre seule 400€"}>Chambre seule 400€</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Control
               as="textarea"
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => setComments(e.target.value)}
               rows={3}
               placeholder="Avez vous un détail à apporter ? "
             />
           </Form.Group>
         </Form>
+        <Form.Label>{error}</Form.Label>
       </Modal.Body>
 
       <Modal.Footer>

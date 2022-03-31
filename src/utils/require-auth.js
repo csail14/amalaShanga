@@ -25,14 +25,12 @@ export default function (ChildComponent, withAuth = false, isAdmin = false) {
         this.props.yogaClasses.array.length === 0
       ) {
         getAllYoga().then((res) => {
-          console.log(res.result);
           this.props.loadYogaInfo(res.result);
         });
       }
     };
     componentDidMount = async () => {
       const token = window.localStorage.getItem("AmalaToken");
-      console.log("token", token);
       this.checkYogaClasse();
       if (token === null && withAuth) {
         this.setState({ redirect: true });

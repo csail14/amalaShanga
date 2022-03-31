@@ -23,13 +23,7 @@ const ModalAddToBasket = (props) => {
       <Modal.Header closeButton>
         <Modal.Title>Ajouter un cours</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        {!isLogged
-          ? "Vous devez vous connecter pour acheter un cours."
-          : !isMember
-          ? "Vous devez etre membre pour acheter un cours."
-          : "Votre cours a bien été ajouté au panier."}
-      </Modal.Body>
+      <Modal.Body>{props.modalMessage}</Modal.Body>
       <Modal.Footer>
         <Button id="primary-btn" variant="primary" onClick={handleClick}>
           {!isLogged
