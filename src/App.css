@@ -51,11 +51,16 @@
 }
 
 #primary-btn {
-  color: black;
+  color: white;
+  font-weight: 700;
   padding: 10px;
-  background-color: #fdfaeb;
+  background-color: #9ec2d7;
   border: none;
-  box-shadow: 0px 10px 15px rgb(0 0 0 / 37%);
+  box-shadow: 0px 2px 15px rgb(0 0 0 / 30%);
+}
+
+.navbar-nav {
+  align-items: center;
 }
 
 a {

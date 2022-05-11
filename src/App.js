@@ -9,6 +9,7 @@ import Yoga from "./screens/Yoga/yoga";
 import Meditation from "./screens/Meditation/meditation";
 import Other from "./screens/Other/Other";
 import MyAccount from "./screens/Account/myAccount";
+import NonAuth from "./screens/Admin/NonAuth";
 import Login from "./screens/Account/login";
 import Register from "./screens/Account/register";
 import Admin from "./screens/Admin/admin";
@@ -54,14 +55,20 @@ function App() {
           />
           <Route exact path="/login" component={Login} />
           <Route exact path="/Register" component={Register} />
-          <Route exact path="/stage" component={Stage1} />
+          <Route exact path="/stage" component={Other} />
+          <Route exact path="/stage1" component={Stage1} />
+          <Route exact path="/non-authorize" component={NonAuth} />
           <Route
             exact
             path="/paiement-succeed"
             component={RequireAuth(PaymentSuceed, false)}
           />
           <Route exact path="/paiement" component={Paiment} />
-          <Route exact path="/admin" component={RequireAuth(Admin, false)} />
+          <Route
+            exact
+            path="/admin"
+            component={RequireAuth(Admin, true, true)}
+          />
           <Route exact path="/logout" component={Logout} />
         </Switch>
       </div>

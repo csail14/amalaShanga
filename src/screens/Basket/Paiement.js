@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import CheckoutForm from "./CheckoutForm";
+import Fond3 from "../../assets/imageFond3.jpeg";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Button from "react-bootstrap/Button";
@@ -99,7 +100,13 @@ const Paiement = (props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
 
   return (
-    <MainContainer>
+    <MainContainer
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Fond3})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {props.basket && props.basket.products && (
         <BasketContainer isMobile={isMobile}>
           <BasketTitle>

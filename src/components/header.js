@@ -47,22 +47,22 @@ const Header = (props) => {
                   Cours de Yoga
                 </Link>
               </Nav.Link>
-              <Nav.Link
-                href="https://www.yogapsy.fr/28834-yogapsy-yoga-et-psychotherapie.php"
-                target="_blank"
-                className="header-link"
-              >
-                Yoga Psy
+              <Nav.Link>
+                <Link className="header-link" to="/stage">
+                  Stages
+                </Link>
               </Nav.Link>
               <Nav.Link>
                 <Link className="header-link" to="/meditation">
                   Meditation
                 </Link>
               </Nav.Link>
-              <Nav.Link>
-                <Link className="header-link" to="/stage">
-                  Stages
-                </Link>
+              <Nav.Link
+                href="https://www.yogapsy.fr/28834-yogapsy-yoga-et-psychotherapie.php"
+                target="_blank"
+                className="header-link"
+              >
+                Yoga Psy
               </Nav.Link>
             </Nav>
             <Nav>

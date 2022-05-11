@@ -16,6 +16,10 @@ const ModalSubscribe = (props) => {
 
   const stageTitle = "Stage Yoga Juillet";
 
+  const isLogged = props.user && props.user.isLogged;
+  const isMember = isLogged && props.user.infos && props.user.infos.isMember;
+  const isAuthorize = isLogged && isMember;
+  console.log("isMember", isMember);
   const submit = () => {
     let data = {
       lastName: lastName,
@@ -38,7 +42,6 @@ const ModalSubscribe = (props) => {
         .then((res) => {
           setError("");
           if (res.status === 200) {
-            console.log(res);
             props.handleClose();
             props.handleShowModalValidation();
           } else {
@@ -54,73 +57,84 @@ const ModalSubscribe = (props) => {
       <Modal.Header closeButton>
         <Modal.Title>M'inscrire au stage</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Nom</Form.Label>
-            <Form.Control
-              type="text"
-              required
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Entrer votre nom *"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Prénom</Form.Label>
-            <Form.Control
-              onChange={(e) => setFirstName(e.target.value)}
-              type="text"
-              placeholder="Entrer votre prénom *"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Entrer votre email * "
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control
-              as="textarea"
-              onChange={(e) => setTransport(e.target.value)}
-              rows={3}
-              placeholder="Précisez ici comment vous vous rendez sur le lieu du stage *"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Votre chambre</Form.Label>
-            <Form.Select
-              onChange={(e) => setRoom(e.target.value)}
-              aria-label="Default select example"
-            >
-              <option value={"Chambre double 300€"}>Chambre double 300€</option>
-              <option value={"Chambre en dortoir 275€"}>
-                Chambre en dortoir 275€
-              </option>
-              <option value={"Chambre seule 400€"}>Chambre seule 400€</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control
-              as="textarea"
-              onChange={(e) => setComments(e.target.value)}
-              rows={3}
-              placeholder="Avez vous un détail à apporter ? "
-            />
-          </Form.Group>
-        </Form>
-        <Form.Label>{error}</Form.Label>
-      </Modal.Body>
+      {isAuthorize ? (
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Nom</Form.Label>
+              <Form.Control
+                type="text"
+                required
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Entrer votre nom *"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Prénom</Form.Label>
+              <Form.Control
+                onChange={(e) => setFirstName(e.target.value)}
+                type="text"
+                placeholder="Entrer votre prénom *"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="Entrer votre email * "
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Control
+                as="textarea"
+                onChange={(e) => setTransport(e.target.value)}
+                rows={3}
+                placeholder="Précisez ici comment vous vous rendez sur le lieu du stage *"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Votre chambre</Form.Label>
+              <Form.Select
+                onChange={(e) => setRoom(e.target.value)}
+                aria-label="Default select example"
+              >
+                <option value={"Chambre double 300€"}>
+                  Chambre double 300€
+                </option>
+                <option value={"Chambre en dortoir 275€"}>
+                  Chambre en dortoir 275€
+                </option>
+                <option value={"Chambre seule 400€"}>Chambre seule 400€</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Control
+                as="textarea"
+                onChange={(e) => setComments(e.target.value)}
+                rows={3}
+                placeholder="Avez vous un détail à apporter ? "
+              />
+            </Form.Group>
+          </Form>
+          <Form.Label>{error}</Form.Label>
+        </Modal.Body>
+      ) : (
+        <Modal.Body>
+          Vous devez être connecté et à jour dans votre cotisation pour
+          participer au stage.
+        </Modal.Body>
+      )}
 
       <Modal.Footer>
         <Button variant="secondary" onClick={props.handleClose}>
           Fermer
         </Button>
-        <Button variant="primary" onClick={submit}>
-          Envoyer mon inscription
-        </Button>
+        {isAuthorize && (
+          <Button variant="primary" onClick={submit}>
+            Envoyer mon inscription
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   );
@@ -129,7 +143,7 @@ const ModalSubscribe = (props) => {
 const mapDispatchToProps = {};
 
 const mapStateToProps = (store) => {
-  return {};
+  return { user: store.user };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalSubscribe);

@@ -15,10 +15,11 @@ const MainContainer = styled.div`
   padding-top: ${(props) => (props.isMobile ? "100px" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
+  color: white;
 `;
 
 const TitleContainer = styled.p`
-  color: #625454;
+  color: white;
   font-weight: 700;
   font-size: 32px;
   text-align: center;
@@ -31,7 +32,7 @@ const ErrorMessage = styled.p`
 `;
 
 const SubTitleContainer = styled.p`
-  color: #625454;
+  color: white;
   font-size: 18px;
   text-align: center;
   margin: 20px;
@@ -144,7 +145,10 @@ const Home = (props) => {
         </Form>
       </InfoContainer>
       <SubTitleContainer>
-        Pas encore membre ? <Link to="/register">Créez un compte</Link>
+        Pas encore membre ?{" "}
+        <Link style={{ cursor: "pointer", fontWeight: 700 }} to="/register">
+          Créez un compte
+        </Link>
       </SubTitleContainer>
     </MainContainer>
   );

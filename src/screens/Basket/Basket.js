@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React from "react";
+import Fond3 from "../../assets/imageFond3.jpeg";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -67,7 +68,13 @@ const Basket = (props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
 
   return (
-    <MainContainer>
+    <MainContainer
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Fond3})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* <TitleContainer>Votre panier</TitleContainer> */}
       {props.basket && props.basket.products && (
         <BasketContainer isMobile={isMobile}>

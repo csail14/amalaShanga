@@ -48,6 +48,9 @@ export default function (ChildComponent, withAuth = false, isAdmin = false) {
                 this.setState({ redirect: true });
               } else {
                 this.props.loadUserInfo(true, response.data.user);
+                if (response.data.user.role !== "admin" && isAdmin) {
+                  this.setState({ redirectNoAdmin: true });
+                }
               }
             });
         } else if (

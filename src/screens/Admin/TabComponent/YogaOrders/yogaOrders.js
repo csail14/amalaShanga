@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { getAllYogaOrder } from "../../../../utils/API/orderApi";
+import { getAllYogaOrderWithProductDetails } from "../../../../utils/API/orderApi";
 import { useMediaQuery } from "react-responsive";
+import moment from "moment";
 
 const SubTitleContainer = styled.p`
   color: grey;
@@ -47,7 +48,7 @@ const YogaOrders = (props) => {
   const [yogaOrders, setYogaOrders] = useState([]);
 
   useEffect(() => {
-    getAllYogaOrder()
+    getAllYogaOrderWithProductDetails()
       .then((res) => {
         if (res && res.data && res.data.result) {
           setYogaOrders(res.data.result);
@@ -55,35 +56,28 @@ const YogaOrders = (props) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(yogaOrders);
   return (
     <InfoContainer isMobile={isMobile}>
-      <SubTitleContainer>Les commandes de cours tt </SubTitleContainer>
+      <SubTitleContainer>Les commandes de cours </SubTitleContainer>
       {yogaOrders &&
-        yogaOrders.map((item, index) => {
+        yogaOrders.map((item) => {
           return (
             <AllInfoDetailsContainer
-              key={index}
+              key={item.id}
               className="onHoverIsBorderGrey"
             >
               <InfoDetailsContainer>
-                <b>Image:</b>{" "}
+                <b>Nom du cours: </b>
+                {item.name}
               </InfoDetailsContainer>
               <InfoDetailsContainer>
-                <b>Nom:</b>
-                Hello
+                <b>Nom de l'acheteur: </b> {item.firstName} {item.lastName}
               </InfoDetailsContainer>
               <InfoDetailsContainer>
-                <b>Description:</b> {item.description}
+                <b>Date d'achat :</b> {moment(item.creation_date).format("LL")}
               </InfoDetailsContainer>
               <InfoDetailsContainer>
-                <b>Lien:</b> {item.url}
-              </InfoDetailsContainer>
-              <InfoDetailsContainer>
-                <b>Etat:</b> {item.isAvailable ? "En ligne" : "Hors ligne"}
-              </InfoDetailsContainer>
-              <InfoDetailsContainer>
-                <b>Prix:</b> {item.price} €
+                <b>Prix:</b> {item.price_unit} €
               </InfoDetailsContainer>
               <InfoDetailsContainer></InfoDetailsContainer>
             </AllInfoDetailsContainer>

@@ -13,30 +13,29 @@ import ModalSubscribe from "./ModalSubscribe";
 import SentSubscribeModal from "./SentSubscribeModal";
 
 const MainContainer = styled.div`
-  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
-  padding-bottom: 40px;
+  margin-top: ${(props) => (props.isMobile ? "" : "250px")};
+  margin-bottom: 40px;
+  margin-left: 30px;
+  margin-right: 30px;
+  background: #00000033;
 `;
 
 const TitleContainer = styled.p`
   color: white;
   font-weight: 700;
   font-size: 32px;
-  padding: 30px;
   text-align: left;
 `;
 const DetailsContainer = styled.p`
   color: white;
   font-size: 20px;
-  padding: 10px 30px;
   text-align: left;
 `;
 const SubTitleContainer = styled.p`
   font-size: 22px;
-  padding: 10px 0;
 `;
 
 const TextContainer = styled.div`
-  padding: 30px;
   color: white;
   text-align: left;
   font-size: 20px;
@@ -87,7 +86,7 @@ const Other = () => {
               flexDirection: "column",
               justifyContent: "center",
               maxHeight: "50%",
-              backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)), url(${stageAuvergne1})`,
+              backgroundImage: ` url(${stageAuvergne1})`,
               backgroundSize: "cover",
               backgroundPosition: isMobile ? "center" : "center -591px",
               marginTop: 90,
@@ -110,6 +109,7 @@ const Other = () => {
           </div>
         </div>
       </Fade>
+
       <Content isMobile={isMobile}>
         <ArticleContainer isMobile={isMobile}>
           Le yoga n’est pas une simple « gymnastique douce ». La pratique des
@@ -159,10 +159,13 @@ const Other = () => {
               <li>En chambre double 300€ / personne</li>
               <li>En chambre simple 400€ /personne </li>
             </ul>
-            <p>
-              Inscription : Ecrivez moi frederique@amalasangha.fr pour recevoir
-              le bulletin d'inscription.
-            </p>
+            <Button
+              id="primary-btn"
+              variant="primary"
+              onClick={handleShowModal}
+            >
+              Je m'inscris
+            </Button>
           </p>
         </ArticleContainer>
         <SideBar>

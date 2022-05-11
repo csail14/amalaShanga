@@ -55,7 +55,6 @@ const ModifyPersonalInfoModal = (props) => {
       email: email,
       birthDate: birthDate,
     };
-    console.log("data", data);
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setError("Veuillez saisir un email valide");
     } else if (firstName === "" || firstName === "") {
@@ -63,7 +62,6 @@ const ModifyPersonalInfoModal = (props) => {
     } else {
       setUser(data, props.user.infos.id)
         .then((res) => {
-          console.log(res);
           if (res.status === 200) {
             if (res.data.status === 200) {
               setError("");

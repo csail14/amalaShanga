@@ -66,12 +66,20 @@ const Home = (props) => {
                 Bienvenue sur le site de Amala Sangha !
               </TitleContainer>
               <TextContainer>
-                TEXTE A CHANGER Amala Sangha est une association qui propose
-                pour vous accompagner dans les 3 dimensions de l’être : corps ,
-                âme, esprit. Le corps et l’esprit sont au service de notre âme,
-                de notre Soi pour aller vers plus de rayonnement. Grâce ses
-                activités, Amala Sangha peut soutenir une école en Inde, La
-                petite école de Prema
+                <p>
+                  Amala Sangha vous accompagne à travers la philosophie du yoga
+                  dans les 3 dimensions de l’être : corps, âme, esprit.
+                </p>
+                <p>
+                  Les cours de yoga prennent soin du corps par la pratique de
+                  postures ou asanas, de l’esprit notamment avec les exercices
+                  de respirations ou pranayamas, mais aussi de l’âme avec les
+                  temps de méditations, dyanas.
+                </p>
+                <p>
+                  Le corps et l’esprit sont au service de notre âme, de notre
+                  Soi pour aller vers l’épanouissement de l’être.
+                </p>
               </TextContainer>
               <ButtonContainer>
                 <Button

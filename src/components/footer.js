@@ -8,6 +8,7 @@ import rameauxverts from "../assets/rameauxverts.gif";
 import yogapsy from "../assets/yogapsy.png";
 import yogaprasad from "../assets/yogaprasad.webp";
 import auroville from "../assets/auroville.png";
+import { useMediaQuery } from "react-responsive";
 
 const CopyrightContainer = styled.div`
   color: white;
@@ -27,6 +28,7 @@ const PartnerContainer = styled.div`
 `;
 
 const Header = (props) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   const location = useLocation();
   const isHome =
     location.pathname === "/" || location.pathname.includes("home");
@@ -35,7 +37,7 @@ const Header = (props) => {
       <Navbar
         bg="dark"
         variant="light"
-        style={{ display: "flex", flexDirection: "space-between" }}
+        style={{ display: "flex", flexDirection: isMobile ? "column" : "row" }}
       >
         {isHome && (
           <Container>

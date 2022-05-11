@@ -69,9 +69,9 @@ const Other = (props) => {
             <Button
               id="primary-btn"
               variant="primary"
-              onClick={() => history.push("/stage")}
+              onClick={() => history.push("/stage1")}
             >
-              Plus d'info
+              En savoir plus
             </Button>
           </Card.Body>
         </Card>

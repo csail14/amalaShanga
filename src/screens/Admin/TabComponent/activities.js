@@ -46,7 +46,7 @@ const Activities = (props) => {
       <SubTitleContainer>Les activités </SubTitleContainer>
       <AllInfoDetailsContainer className="onHoverIsBorderGrey">
         <InfoDetailsContainer>
-          <b>Image:</b>{" "}
+          {/* <b>Image:</b>{" "} */}
           {/* <img
               style={{
                 borderRadius: "50%",
@@ -57,7 +57,7 @@ const Activities = (props) => {
               alt="home_illu"
             /> */}
         </InfoDetailsContainer>
-        <InfoDetailsContainer>
+        {/* <InfoDetailsContainer>
           <b>Nom:</b> Cours du 21 octobre
         </InfoDetailsContainer>
         <InfoDetailsContainer>
@@ -80,9 +80,9 @@ const Activities = (props) => {
         <InfoDetailsContainer>
           <FaTrash />
           <FaPen />
-        </InfoDetailsContainer>
+        </InfoDetailsContainer> */}
       </AllInfoDetailsContainer>
-      <AllInfoDetailsContainer className="onHoverIsBorderGrey">
+      {/* <AllInfoDetailsContainer className="onHoverIsBorderGrey">
         <InfoDetailsContainer>
           <b>Nom :</b> Cours du 21 octobre
         </InfoDetailsContainer>
@@ -95,8 +95,8 @@ const Activities = (props) => {
         <InfoDetailsContainer>
           <b>Valide jusqu'au :</b> date
         </InfoDetailsContainer>
-      </AllInfoDetailsContainer>
-      <AllInfoDetailsContainer className="onHoverIsBorderGrey">
+      </AllInfoDetailsContainer> */}
+      {/* <AllInfoDetailsContainer className="onHoverIsBorderGrey">
         <InfoDetailsContainer>
           <b>Nom :</b> Cours du 21 octobre
         </InfoDetailsContainer>
@@ -109,8 +109,8 @@ const Activities = (props) => {
         <InfoDetailsContainer>
           <b>Valide jusqu'au :</b> date
         </InfoDetailsContainer>
-      </AllInfoDetailsContainer>
-      <AllInfoDetailsContainer className="onHoverIsBorderGrey">
+      </AllInfoDetailsContainer> */}
+      {/* <AllInfoDetailsContainer className="onHoverIsBorderGrey">
         <InfoDetailsContainer>
           <b>Nom :</b> Cours du 21 octobre
         </InfoDetailsContainer>
@@ -123,7 +123,7 @@ const Activities = (props) => {
         <InfoDetailsContainer>
           <b>Valide jusqu'au :</b> date
         </InfoDetailsContainer>
-      </AllInfoDetailsContainer>
+      </AllInfoDetailsContainer> */}
     </InfoContainer>
   );
 };
