@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import PhotoUploader from "../../../../service/PhotoUploader";
 import { addYoga } from "../../../../utils/API/yogaApi";
 
 const ModalAddClasses = (props) => {
@@ -10,7 +11,7 @@ const ModalAddClasses = (props) => {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [isAvailable, setIsAvailable] = useState(true);
 
   const submit = () => {
@@ -18,8 +19,9 @@ const ModalAddClasses = (props) => {
       name: name,
       description: description,
       price: price,
-      url: url,
+      url: "https://www.youtube.com/embed/" + url,
       isAvailable: isAvailable,
+      image: image,
     };
     addYoga(data)
       .then((res) => {
@@ -73,17 +75,24 @@ const ModalAddClasses = (props) => {
               placeholder="Entrer le lien"
             />
           </Form.Group>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Ajouter une photo</Form.Label>
-            <Form.Control type="file" />
-          </Form.Group>
           <Form.Select
+            className="mb-3"
             onChange={(e) => setIsAvailable(e.target.value)}
             aria-label="Default select example"
           >
             <option value={true}>Disponible</option>
             <option value={false}>Non disponible</option>
           </Form.Select>
+          <Form.Group controlId="formFile">
+            {image && (
+              <Button className="mb-3">
+                <a href={image} target="_blank" rel="noreferrer">
+                  Voir ma photo
+                </a>
+              </Button>
+            )}
+            <PhotoUploader setImage={setImage} image={image} />
+          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>

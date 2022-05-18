@@ -29,7 +29,7 @@ const InfoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: top;
   margin: 0 50px;
 `;
 
@@ -103,7 +103,13 @@ const Yoga = (props) => {
             variant="top"
             src={Salutation}
           />
-          <Card.Body>
+          <Card.Body
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
             <Card.Title>Salutation au soleil</Card.Title>
             <Card.Text>
               Une pratique quotidienne. Faire cinq salutations au soleil tous
@@ -142,7 +148,13 @@ const Yoga = (props) => {
             variant="top"
             src={Minutes}
           />
-          <Card.Body>
+          <Card.Body
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
             <Card.Title>Ma séance de 30 min</Card.Title>
             <Card.Text>
               Vous n'avez qu'une demi-heure par jour pour pratiquer votre
@@ -180,7 +192,13 @@ const Yoga = (props) => {
             variant="top"
             src={Debutant}
           />
-          <Card.Body>
+          <Card.Body
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
             <Card.Title>Séance de yoga débutant</Card.Title>
             <Card.Text>
               Une séance de 30 minutes avec toutes les explications pour bien
@@ -205,6 +223,10 @@ const Yoga = (props) => {
         {props.yogaClasses &&
           props.yogaClasses.array &&
           props.yogaClasses.array.map((item, index) => {
+            console.log(item);
+            if (item.isAvailable === 0) {
+              return null;
+            }
             return (
               <Card
                 style={{
@@ -216,14 +238,23 @@ const Yoga = (props) => {
                 }}
               >
                 <Card.Img
+                  onClick={() => buyClasses(item)}
                   style={{
                     borderRadius: "20px 20px 12px 12px",
                     boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
+                    maxHeight: "160px",
+                    objectFit: "contain",
                   }}
                   variant="top"
-                  src={yoga_default_image}
+                  src={item.image ? item.image : yoga_default_image}
                 />
-                <Card.Body>
+                <Card.Body
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>{item.description}</Card.Text>
                   <Card.Text>Prix: {item.price} €</Card.Text>

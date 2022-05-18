@@ -30,7 +30,8 @@ export default function (ChildComponent, withAuth = false, isAdmin = false) {
       }
     };
     componentDidMount = async () => {
-      const token = window.localStorage.getItem("AmalaToken");
+      const token =
+        window.localStorage && window.localStorage.getItem("AmalaToken");
       this.checkYogaClasse();
       if (token === null && withAuth) {
         this.setState({ redirect: true });

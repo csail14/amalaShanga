@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { editYoga } from "../../../../utils/API/yogaApi";
+import PhotoUploader from "../../../../service/PhotoUploader";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -11,7 +12,7 @@ const ModalEditClasses = (props) => {
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [image, setImage] = useState("");
-  const [isAvailable, setIsAvailable] = useState(true);
+  const [isAvailable, setIsAvailable] = useState();
 
   useEffect(() => {
     if (props.editItem) {
@@ -20,6 +21,7 @@ const ModalEditClasses = (props) => {
       setDescription(props.editItem.description);
       setUrl(props.editItem.url);
       setIsAvailable(props.editItem.isAvailable);
+      setImage(props.editItem.image);
     }
   }, [props.editItem]);
 
@@ -30,6 +32,7 @@ const ModalEditClasses = (props) => {
       price: price,
       url: url,
       isAvailable: isAvailable,
+      image: image,
     };
     editYoga(data, props.editItem.id)
       .then((res) => {
@@ -42,6 +45,7 @@ const ModalEditClasses = (props) => {
       })
       .catch((err) => console.log("erreur ajout cours", err));
   };
+  console.log("editItem", props.editItem);
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>
@@ -88,16 +92,22 @@ const ModalEditClasses = (props) => {
             />
           </Form.Group>
           <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label>Ajouter une photo</Form.Label>
-            <Form.Control type="file" />
+            {image && (
+              <Button className="mb-3">
+                <a href={image} target="_blank" rel="noreferrer">
+                  Voir ma photo
+                </a>
+              </Button>
+            )}
+            <PhotoUploader setImage={setImage} image={image} />
           </Form.Group>
           <Form.Select
             value={isAvailable}
             onChange={(e) => setIsAvailable(e.target.value)}
             aria-label="Default select example"
           >
-            <option value="1">Disponible</option>
-            <option value="2">Non disponible</option>
+            <option value={1}>Disponible</option>
+            <option value={0}>Non disponible</option>
           </Form.Select>
         </Form>
       </Modal.Body>

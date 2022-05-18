@@ -6,7 +6,7 @@ import "react-slideshow-image/dist/styles.css";
 import { getStart } from "../../utils/API/API";
 import { Fade } from "react-slideshow-image";
 import imageFond1 from "../../assets/imageFond1.jpeg";
-import imageFond2 from "../../assets/imageFond2.jpeg";
+import imageFond2 from "../../assets/shiva.jpg";
 import Button from "react-bootstrap/Button";
 import { useMediaQuery } from "react-responsive";
 

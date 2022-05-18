@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config } from "../../config";
-const token = window.localStorage.getItem("AmalaToken");
+const token = window.localStorage && window.localStorage.getItem("AmalaToken");
 
 export const getOrderByClient = (id) => {
   return axios

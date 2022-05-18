@@ -8,6 +8,8 @@
   "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
+    "@cloudinary/react": "^1.4.0",
+    "@cloudinary/url-gen": "^1.8.0",
     "@react-native-async-storage/async-storage": "^1.15.14",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.23.0",
@@ -16,6 +18,8 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.23.0",
     "bootstrap": "^5.1.1",
+    "cloudinary-core": "^2.12.3",
+    "cloudinary-react": "^1.7.2",
     "express": "^4.17.3",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -38,7 +42,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && react-snapshot",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

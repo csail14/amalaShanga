@@ -160,7 +160,9 @@ const MyAccount = (props) => {
               <Link
                 to={{
                   pathname: "studio",
-                  state: { url: order && order.details && order.details.url },
+                  state: {
+                    url: order && order.details && order.details.url,
+                  },
                 }}
               >
                 <AllInfoDetailsContainer className="onHoverIsGrey">

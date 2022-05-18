@@ -66,6 +66,7 @@ const Classes = (props) => {
     setDeleteItem(item);
   };
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
+
   return (
     <InfoContainer isMobile={isMobile}>
       <Button
@@ -85,15 +86,11 @@ const Classes = (props) => {
             >
               <InfoDetailsContainer>
                 <b>Image:</b>{" "}
-                {/* <img
-                  style={{
-                    borderRadius: "50%",
-                    maxHeight: "200px",
-                    margin: "20px",
-                  }}
-                  src={fred}
-                  alt="home_illu"
-                /> */}
+                {item.image && (
+                  <a href={item.image} target="_blank" rel="noreferrer">
+                    Lien
+                  </a>
+                )}
               </InfoDetailsContainer>
               <InfoDetailsContainer>
                 <b>Nom:</b>
