@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Fond3 from "../../assets/imageFond3.jpeg";
 import yoga_default_image from "../../assets/yoga_default_image.jpeg";
 import Minutes from "../../assets/30minutes.png";
 import Debutant from "../../assets/debutant.jpeg";
@@ -60,7 +61,7 @@ const Yoga = (props) => {
           setModalMessage("Ce cours est déjà dans votre panier.");
         } else if (isAlreadyBuy) {
           setModalMessage(
-            "Vous avez déjà acheté ce cours. Rendez vous dans la rubrique 'Mon compte' pour le consulter."
+            "Vous avez déjà acheté ce cours.  Rendez vous dans la rubrique 'Mon compte' pour le consulter."
           );
         } else {
           setModalMessage("Votre cours a bien été ajouté au panier.");
@@ -78,8 +79,23 @@ const Yoga = (props) => {
     }
   };
 
+  const classes =
+    props.yogaClasses &&
+    props.yogaClasses.array &&
+    props.yogaClasses.array.sort(function (a, b) {
+      console.log();
+      return new Date(b.creation_date) - new Date(a.creation_date);
+    });
+
   return (
-    <MainContainer isMobile={isMobile}>
+    <MainContainer
+      isMobile={isMobile}
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Fond3})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <TitleContainer>
         Voici la liste des cours de yoga mis à disposition
       </TitleContainer>
@@ -220,55 +236,52 @@ const Yoga = (props) => {
           </Card.Body>
         </Card>
 
-        {props.yogaClasses &&
-          props.yogaClasses.array &&
-          props.yogaClasses.array.map((item, index) => {
-            console.log(item);
-            if (item.isAvailable === 0) {
-              return null;
-            }
-            return (
-              <Card
+        {classes.map((item, index) => {
+          if (item.isAvailable === 0) {
+            return null;
+          }
+          return (
+            <Card
+              style={{
+                width: "18rem",
+                boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
+                borderRadius: "20px",
+                margin: "8px",
+                cursor: "pointer",
+              }}
+            >
+              <Card.Img
+                onClick={() => buyClasses(item)}
                 style={{
-                  width: "18rem",
+                  borderRadius: "20px 20px 12px 12px",
                   boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
-                  borderRadius: "20px",
-                  margin: "8px",
-                  cursor: "pointer",
+                  maxHeight: "160px",
+                  objectFit: "contain",
+                }}
+                variant="top"
+                src={item.image ? item.image : yoga_default_image}
+              />
+              <Card.Body
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
                 }}
               >
-                <Card.Img
+                <Card.Title>{item.name}</Card.Title>
+                <Card.Text>{item.description}</Card.Text>
+                <Card.Text>Prix: {item.price} €</Card.Text>
+                <Button
+                  id="primary-btn"
+                  variant="primary"
                   onClick={() => buyClasses(item)}
-                  style={{
-                    borderRadius: "20px 20px 12px 12px",
-                    boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
-                    maxHeight: "160px",
-                    objectFit: "contain",
-                  }}
-                  variant="top"
-                  src={item.image ? item.image : yoga_default_image}
-                />
-                <Card.Body
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
                 >
-                  <Card.Title>{item.name}</Card.Title>
-                  <Card.Text>{item.description}</Card.Text>
-                  <Card.Text>Prix: {item.price} €</Card.Text>
-                  <Button
-                    id="primary-btn"
-                    variant="primary"
-                    onClick={() => buyClasses(item)}
-                  >
-                    Acheter ce cours
-                  </Button>
-                </Card.Body>
-              </Card>
-            );
-          })}
+                  Acheter ce cours
+                </Button>
+              </Card.Body>
+            </Card>
+          );
+        })}
       </InfoContainer>
       <ModalAddToBasket
         show={showAddToBasketModal}

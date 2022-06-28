@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
-import Button from "react-bootstrap/Button";
+import Fond3 from "../../assets/imageFond3.jpeg";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import {
@@ -43,8 +43,15 @@ const Studio = (props) => {
     props.yogaClasses.array.length &&
     props.yogaClasses.array[0];
   return (
-    <MainContainer isMobile={isMobile}>
-      <TitleContainer>{classes && classes.name}</TitleContainer>
+    <MainContainer
+      style={{
+        backgroundImage: ` url(${Fond3})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      isMobile={isMobile}
+    >
+      {/* <TitleContainer>{classes && classes.name}</TitleContainer> */}
       <BasketContainer isMobile={isMobile}>
         <iframe
           width={isMobile ? "100%" : "650px"}

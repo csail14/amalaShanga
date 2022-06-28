@@ -10,13 +10,18 @@ import { useMediaQuery } from "react-responsive";
 const Header = (props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   return (
-    <header className="header">
+    <header
+      className="header"
+      style={{
+        backgroundColor: "#9ec2d7",
+      }}
+    >
       <Navbar
         collapseOnSelect
         fixed="top"
-        bg="light"
         variant="light"
         expand="lg"
+        className="color-nav"
       >
         <Container
           style={{
@@ -87,30 +92,37 @@ const Header = (props) => {
                   </Link>
                 </Nav.Link>
               )}
-
               <Nav.Link>
-                <Link
-                  className="header-link"
-                  to="/basket"
-                  style={{ flexWrap: "nowrap" }}
-                >
-                  Mon panier{" "}
-                  {props.basket.products.length > 0 ? (
-                    <bold
-                      style={{
-                        border: "2px solid black",
-                        padding: "2px 8px",
-                        borderRadius: "50%",
-                        fontWeight: 700,
-                      }}
-                    >
-                      {props.basket.products.length}
-                    </bold>
-                  ) : (
-                    ""
-                  )}
+                <Link className="header-link" to="/contact">
+                  Contact
                 </Link>
               </Nav.Link>
+
+              {props.user && props.user.isLogged && (
+                <Nav.Link>
+                  <Link
+                    className="header-link"
+                    to="/basket"
+                    style={{ flexWrap: "nowrap" }}
+                  >
+                    Mon panier{" "}
+                    {props.basket.products.length > 0 ? (
+                      <bold
+                        style={{
+                          border: "2px solid white",
+                          padding: "2px 8px",
+                          borderRadius: "50%",
+                          fontWeight: 700,
+                        }}
+                      >
+                        {props.basket.products.length}
+                      </bold>
+                    ) : (
+                      ""
+                    )}
+                  </Link>
+                </Nav.Link>
+              )}
               {props.user && props.user.isLogged && (
                 <Nav.Link>
                   <Link className="header-link" to="/logout">

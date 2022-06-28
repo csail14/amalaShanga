@@ -36,11 +36,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={RequireAuth(Home, false)} />
             <Route exact path="/home" component={RequireAuth(Home, false)} />
-            <Route
-              exact
-              path="/contact"
-              component={RequireAuth(Contact, false)}
-            />
+            <Route exact path="/contact" component={Contact} />
             <Route exact path="/yoga" component={RequireAuth(Yoga, false)} />
             <Route exact path="/basket" component={Basket} />
             <Route exact path="/studio" component={RequireAuth(Studio, true)} />

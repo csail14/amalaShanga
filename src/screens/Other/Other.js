@@ -6,17 +6,12 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useHistory } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import Fond3 from "../../assets/imageFond3.jpeg";
 
 const MainContainer = styled.div`
   padding-top: ${(props) => (props.isMobile ? "" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
-`;
-
-const TitleContainer = styled.p`
-  color: white;
-  font-weight: 700;
-  font-size: 32px;
 `;
 
 const InfoContainer = styled.div`
@@ -32,10 +27,14 @@ const Other = (props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
 
   return (
-    <MainContainer isMobile={isMobile}>
-      <TitleContainer>
-        Voici la liste des cours de yoga mis à disposition
-      </TitleContainer>
+    <MainContainer
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Fond3})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      isMobile={isMobile}
+    >
       <InfoContainer>
         <Card
           style={{

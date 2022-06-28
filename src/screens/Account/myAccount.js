@@ -9,6 +9,7 @@ import moment from "moment";
 import ModifyPersonalInfoModal from "./modifyPersonalInfoModal";
 import CotisationoModal from "./cotisationModal";
 import { isMemberCheck } from "../../service/userService";
+import Fond3 from "../../assets/imageFond3.jpeg";
 require("moment/locale/fr.js");
 
 const MainContainer = styled.div`
@@ -79,7 +80,13 @@ const MyAccount = (props) => {
       .catch((error) => console.log(error));
   }, [userDetails]);
   return (
-    <MainContainer>
+    <MainContainer
+      style={{
+        backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Fond3})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <TitleContainer>
         Bienvenue {userDetails && userDetails.firstName}{" "}
       </TitleContainer>

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { FaTrash, FaPen } from "react-icons/fa";
+import { Form, Button } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
+import {
+  getActivitiesById,
+  editActivities,
+} from "../../../utils/API/activitiesApi";
 
 const SubTitleContainer = styled.p`
   color: grey;
@@ -41,11 +45,49 @@ const AllInfoDetailsContainer = styled.div`
 
 const Activities = (props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
+  const [meditationUrl, setMeditationUrl] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    getActivitiesById(1).then((res) => {
+      setMeditationUrl(res?.result?.url);
+    });
+  }, []);
+
+  const submit = () => {
+    const body = {
+      name: "meditation",
+      url: meditationUrl,
+    };
+    editActivities(body, 1).then((res) => {
+      if (res.status === 200) {
+        setSuccess(true);
+      }
+    });
+  };
   return (
     <InfoContainer isMobile={isMobile}>
       <SubTitleContainer>Les activités </SubTitleContainer>
       <AllInfoDetailsContainer className="onHoverIsBorderGrey">
         <InfoDetailsContainer>
+          Lien méditation
+          <div style={{ display: "flex" }}>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={meditationUrl}
+              onChange={(e) => {
+                setMeditationUrl(e.target.value);
+              }}
+              style={{ width: "80vw" }}
+            />
+            {success && (
+              <Form.Text className="text-muted">Lien modifié</Form.Text>
+            )}
+            <Button id="primary-btn" variant="primary" onClick={submit}>
+              Modifier le lien
+            </Button>
+          </div>
           {/* <b>Image:</b>{" "} */}
           {/* <img
               style={{
@@ -57,6 +99,7 @@ const Activities = (props) => {
               alt="home_illu"
             /> */}
         </InfoDetailsContainer>
+
         {/* <InfoDetailsContainer>
           <b>Nom:</b> Cours du 21 octobre
         </InfoDetailsContainer>

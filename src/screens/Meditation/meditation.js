@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import meditation from "../../assets/meditation.jpeg";
 import Button from "react-bootstrap/Button";
+import { getActivitiesById } from "../../utils/API/activitiesApi";
+
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,6 +30,13 @@ const TextContainer = styled.div`
   font-size: 20px;
 `;
 const Home = (props) => {
+  const [meditationUrl, setMeditationUrl] = useState("");
+
+  useEffect(() => {
+    getActivitiesById(1).then((res) => {
+      setMeditationUrl(res?.result?.url);
+    });
+  }, []);
   return (
     <MainContainer
       style={{
@@ -39,9 +48,11 @@ const Home = (props) => {
       <TitleContainer>Suivez la méditation du mois</TitleContainer>
       <InfoContainer>
         <TextContainer>
-          <Button id="primary-btn" variant="primary">
-            Je medite
-          </Button>
+          <a href={meditationUrl} target="_blank">
+            <Button id="primary-btn" variant="primary">
+              Je medite
+            </Button>
+          </a>
         </TextContainer>
       </InfoContainer>
     </MainContainer>

@@ -54,7 +54,7 @@ const Home = (props) => {
               flexDirection: "column",
               justifyContent: "center",
               height: isMobile ? "100%" : "83vh",
-              backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)), url(${slideImage})`,
+              backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), url(${slideImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               marginTop: 90,
@@ -87,7 +87,7 @@ const Home = (props) => {
                   variant="primary"
                   onClick={() => history.push("/register")}
                 >
-                  Je m'inscris
+                  Créer un compte
                 </Button>
               </ButtonContainer>
             </MainContainer>

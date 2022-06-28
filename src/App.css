@@ -22,7 +22,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #9ec2d7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -72,6 +72,11 @@ a {
   color: #61dafb;
 }
 
+.color-nav {
+  background-color: #9ec2d7;
+  box-shadow: 1px 1px 8px;
+}
+
 #submit {
   padding: 10px;
   border-radius: 12px;
@@ -79,11 +84,11 @@ a {
 
 .header-link {
   text-decoration: none;
-  color: grey;
+  color: white !important;
   padding: 18px;
 }
 .header-link:hover {
-  font-weight: 700;
+  text-decoration: underline !important;
   color: grey;
 }
 .onHoverIsGrey:hover {
