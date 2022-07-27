@@ -12,7 +12,7 @@ import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`
   width: ${(props) => (props.isMobile ? "" : "50%")};
-  margin-top: ${(props) => (props.isMobile ? "50px" : "")};
+  margin-top: "50px";
 `;
 
 const TitleContainer = styled.p`

@@ -75,7 +75,6 @@ const Basket = (props) => {
         backgroundPosition: "center",
       }}
     >
-      {/* <TitleContainer>Votre panier</TitleContainer> */}
       {props.basket && props.basket.products && (
         <BasketContainer isMobile={isMobile}>
           <BasketTitle>

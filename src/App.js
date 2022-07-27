@@ -20,7 +20,10 @@ import Logout from "./screens/Account/logout";
 import Basket from "./screens/Basket/Basket";
 import Studio from "./screens/Studio/Studio";
 import Stage1 from "./screens/Other/OtherDetails";
+import StageGrece from "./screens/Other/StageGrece";
 import PaymentSuceed from "./screens/Basket/PaymentSucced";
+import ForgotPassWord from "./screens/Account/forgotPassword";
+import ChangePassword from "./screens/Account/ChangePassword";
 function App() {
   const location = useLocation();
 
@@ -52,9 +55,16 @@ function App() {
               component={RequireAuth(MyAccount, true)}
             />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/forgot-password" component={ForgotPassWord} />
+            <Route
+              exact
+              path="/changePassword/:key_id"
+              component={ChangePassword}
+            />
             <Route exact path="/Register" component={Register} />
             <Route exact path="/stage" component={Other} />
             <Route exact path="/stage1" component={Stage1} />
+            <Route exact path="/stage2" component={StageGrece} />
             <Route exact path="/non-authorize" component={NonAuth} />
             <Route
               exact

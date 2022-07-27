@@ -11,3 +11,14 @@ export const subscribeStage = (body) => {
       return err;
     });
 };
+
+export const sendContact = (body) => {
+  return axios
+    .post(config.api_url + "api/v1/contact", body)
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      return err;
+    });
+};

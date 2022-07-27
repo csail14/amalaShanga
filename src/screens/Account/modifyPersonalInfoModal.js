@@ -54,6 +54,9 @@ const ModifyPersonalInfoModal = (props) => {
       lastName: lastName,
       email: email,
       birthDate: birthDate,
+      isMember: props.user.infos.isMember,
+      last_paiement_cotisation_date:
+        props.user.infos.last_paiement_cotisation_date,
     };
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setError("Veuillez saisir un email valide");
@@ -73,7 +76,6 @@ const ModifyPersonalInfoModal = (props) => {
         .catch((error) => console.log(error));
     }
   };
-  console.log(props.user);
   return (
     <Modal show={props.show} onHide={props.handleClose}>
       <Modal.Header closeButton>

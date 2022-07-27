@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React from "react";
 import Fond3 from "../../assets/imageFond3.jpeg";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -13,17 +13,10 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
+  padding-top: ${(props) => (props.isMobile ? "100px" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
 `;
-
-const TitleContainer = styled.div`
-  color: white;
-  font-size: 30px;
-  margin-bottom: 30px;
-`;
-
 const BasketContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -38,10 +31,7 @@ const Studio = (props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   const url =
     props.location && props.location.state && props.location.state.url;
-  const classes =
-    props.yogaClasses &&
-    props.yogaClasses.array.length &&
-    props.yogaClasses.array[0];
+
   return (
     <MainContainer
       style={{
@@ -51,7 +41,6 @@ const Studio = (props) => {
       }}
       isMobile={isMobile}
     >
-      {/* <TitleContainer>{classes && classes.name}</TitleContainer> */}
       <BasketContainer isMobile={isMobile}>
         <iframe
           width={isMobile ? "100%" : "650px"}

@@ -70,9 +70,7 @@ const Other = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   const handleClose = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
-
   const [showModalValidation, setShowModalValidation] = useState(false);
-
   const handleCloseValidation = () => setShowModalValidation(false);
   const handleShowModalValidation = () => setShowModalValidation(true);
 

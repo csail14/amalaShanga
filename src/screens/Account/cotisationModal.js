@@ -9,9 +9,7 @@ import { createPaiement } from "../../utils/API/paiementApi";
 import { useMediaQuery } from "react-responsive";
 import CheckoutForm from "../Basket/CheckoutForm";
 
-const stripePromise = loadStripe(
-  "pk_test_51KAeRqJOevlhOGCx8NPhobr1udMglQGjThDvVQQFIonDafUXwYgEsN5wFgOwVBOFnqzdVm9J5JEBJpKM2nS3HPDT00hCzf75Fi"
-);
+const stripePromise = loadStripe(process.env.REACT_APP_ENV_STIPE_KEY);
 
 const BasketContainer = styled.div`
   display: flex;

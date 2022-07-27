@@ -48,7 +48,7 @@ const SuccessMessage = styled.p`
   color: green;
   font-weight: bold;
 `;
-const Home = (props) => {
+const Register = (props) => {
   const [lastName, setLastName] = useState("");
   const [firstName, setfirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -212,7 +212,7 @@ const Home = (props) => {
                 à nos élèves.
               </Form.Text>
             </Form.Group>
-            <Form.Group controlId="formFile" className="mb-3">
+            {/* <Form.Group controlId="formFile" className="mb-3">
               <Form.Label style={{ color: "#625454" }}>
                 Ajouter une photo
               </Form.Label>
@@ -220,7 +220,7 @@ const Home = (props) => {
                 onChange={(e) => handleChange("photo", e.target.value)}
                 type="file"
               />
-            </Form.Group>
+            </Form.Group> */}
             <ReCAPTCHA
               sitekey="6LcLjWgdAAAAAC0Pb4Gpcxy2XbRt-FQII1NCX0LR"
               onChange={onValidateCaptcha}
@@ -256,4 +256,4 @@ const mapStateToProps = (store) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

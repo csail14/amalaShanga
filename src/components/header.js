@@ -5,10 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import logo_amala from "../assets/logo_amala.png";
-import { useMediaQuery } from "react-responsive";
 
 const Header = (props) => {
-  const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
   return (
     <header
       className="header"
@@ -26,7 +24,7 @@ const Header = (props) => {
         <Container
           style={{
             marginRight: 0,
-            marginLeft: isMobile ? "10px" : "60px",
+            marginLeft: 0,
             minWidth: "-webkit-fill-available",
           }}
         >
@@ -42,25 +40,17 @@ const Header = (props) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse collapseOnSelect id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link>
-                <Link className="header-link" to="/home">
-                  Accueil
-                </Link>
+              <Nav.Link className="header-link" href="/home">
+                Accueil
               </Nav.Link>
-              <Nav.Link>
-                <Link className="header-link" to="/yoga">
-                  Cours de Yoga
-                </Link>
+              <Nav.Link className="header-link" href="/yoga">
+                Cours de Yoga
               </Nav.Link>
-              <Nav.Link>
-                <Link className="header-link" to="/stage">
-                  Stages
-                </Link>
+              <Nav.Link className="header-link" href="/stage">
+                Stages
               </Nav.Link>
-              <Nav.Link>
-                <Link className="header-link" to="/meditation">
-                  Meditation
-                </Link>
+              <Nav.Link className="header-link" href="/meditation">
+                Meditation
               </Nav.Link>
               <Nav.Link
                 href="https://www.yogapsy.fr/28834-yogapsy-yoga-et-psychotherapie.php"
@@ -72,62 +62,50 @@ const Header = (props) => {
             </Nav>
             <Nav>
               {props.user && !props.user.isLogged && (
-                <Nav.Link>
-                  <Link className="header-link" to="/login">
-                    Se connecter
-                  </Link>
+                <Nav.Link className="header-link" href="/login">
+                  Se connecter
                 </Nav.Link>
               )}
               {props.user && !props.user.isLogged && (
-                <Nav.Link>
-                  <Link className="header-link" to="/register">
-                    Creer un compte
-                  </Link>
+                <Nav.Link className="header-link" href="/register">
+                  Creer un compte
                 </Nav.Link>
               )}
               {props.user && props.user.isLogged && (
-                <Nav.Link>
-                  <Link className="header-link" to="/myAccount">
-                    Mon compte
-                  </Link>
+                <Nav.Link className="header-link" href="/myAccount">
+                  Mon compte
                 </Nav.Link>
               )}
-              <Nav.Link>
-                <Link className="header-link" to="/contact">
-                  Contact
-                </Link>
+              <Nav.Link className="header-link" href="/contact">
+                Contact
               </Nav.Link>
 
               {props.user && props.user.isLogged && (
-                <Nav.Link>
-                  <Link
-                    className="header-link"
-                    to="/basket"
-                    style={{ flexWrap: "nowrap" }}
-                  >
-                    Mon panier{" "}
-                    {props.basket.products.length > 0 ? (
-                      <bold
-                        style={{
-                          border: "2px solid white",
-                          padding: "2px 8px",
-                          borderRadius: "50%",
-                          fontWeight: 700,
-                        }}
-                      >
-                        {props.basket.products.length}
-                      </bold>
-                    ) : (
-                      ""
-                    )}
-                  </Link>
+                <Nav.Link
+                  className="header-link"
+                  href="/basket"
+                  style={{ flexWrap: "nowrap" }}
+                >
+                  Mon panier{" "}
+                  {props.basket.products.length > 0 ? (
+                    <bold
+                      style={{
+                        border: "2px solid white",
+                        padding: "2px 8px",
+                        borderRadius: "50%",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {props.basket.products.length}
+                    </bold>
+                  ) : (
+                    ""
+                  )}
                 </Nav.Link>
               )}
               {props.user && props.user.isLogged && (
-                <Nav.Link>
-                  <Link className="header-link" to="/logout">
-                    Se deconnecter
-                  </Link>
+                <Nav.Link className="header-link" href="/logout">
+                  Se deconnecter
                 </Nav.Link>
               )}
             </Nav>

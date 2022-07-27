@@ -145,6 +145,15 @@ const Home = (props) => {
         </Form>
       </InfoContainer>
       <SubTitleContainer>
+        Mot de passe oublié ?{" "}
+        <Link
+          style={{ cursor: "pointer", fontWeight: 700 }}
+          to="/forgot-password"
+        >
+          Cliquez-ici
+        </Link>
+      </SubTitleContainer>
+      <SubTitleContainer>
         Pas encore membre ?{" "}
         <Link style={{ cursor: "pointer", fontWeight: 700 }} to="/register">
           Créez un compte

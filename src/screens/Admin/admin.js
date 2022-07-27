@@ -7,9 +7,10 @@ import Tab from "react-bootstrap/Tab";
 import Classes from "./TabComponent/Yoga/classes";
 import Activites from "./TabComponent/activities";
 import { useMediaQuery } from "react-responsive";
+import Members from "./TabComponent/Members/Members";
 
 const MainContainer = styled.div`
-  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
+  padding-top: ${(props) => (props.isMobile ? "100px" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
 `;
@@ -38,6 +39,9 @@ const Home = (props) => {
         </Tab>
         <Tab eventKey="other" title="Commandes">
           <Orders />
+        </Tab>
+        <Tab eventKey="users" title="Membres">
+          <Members />
         </Tab>
       </Tabs>
     </MainContainer>

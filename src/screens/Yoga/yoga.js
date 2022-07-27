@@ -15,15 +15,9 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 
 const MainContainer = styled.div`
-  padding-top: ${(props) => (props.isMobile ? "" : "100px")};
+  padding-top: ${(props) => (props.isMobile ? "100px" : "100px")};
   padding-bottom: 40px;
   min-height: 96vh;
-`;
-
-const TitleContainer = styled.p`
-  color: white;
-  font-weight: 700;
-  font-size: 32px;
 `;
 
 const InfoContainer = styled.div`
@@ -96,9 +90,9 @@ const Yoga = (props) => {
         backgroundPosition: "center",
       }}
     >
-      <TitleContainer>
+      {/* <TitleContainer>
         Voici la liste des cours de yoga mis à disposition
-      </TitleContainer>
+      </TitleContainer> */}
       <InfoContainer>
         <Card
           style={{

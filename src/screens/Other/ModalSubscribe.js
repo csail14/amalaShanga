@@ -13,13 +13,11 @@ const ModalSubscribe = (props) => {
   const [room, setRoom] = useState("Chambre double 300€");
   const [comments, setComments] = useState("");
   const [error, setError] = useState("");
-
   const stageTitle = "Stage Yoga Juillet";
-
   const isLogged = props.user && props.user.isLogged;
   const isMember = isLogged && props.user.infos && props.user.infos.isMember;
   const isAuthorize = isLogged && isMember;
-  console.log("isMember", isMember);
+
   const submit = () => {
     let data = {
       lastName: lastName,
