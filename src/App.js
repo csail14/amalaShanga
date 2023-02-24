@@ -7,6 +7,8 @@ import Home from "./screens/Home/home";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Yoga from "./screens/Yoga/yoga";
+import CGU from "./screens/Legal/cgu";
+import CGV from "./screens/Legal/cgv";
 import Meditation from "./screens/Meditation/meditation";
 import Other from "./screens/Other/Other";
 import MyAccount from "./screens/Account/myAccount";
@@ -24,6 +26,8 @@ import StageGrece from "./screens/Other/StageGrece";
 import PaymentSuceed from "./screens/Basket/PaymentSucced";
 import ForgotPassWord from "./screens/Account/forgotPassword";
 import ChangePassword from "./screens/Account/ChangePassword";
+import StageGretz from "./screens/Other/StageGretz";
+import StageGretz2 from "./screens/Other/StageGretz2";
 function App() {
   const location = useLocation();
 
@@ -39,9 +43,19 @@ function App() {
           <Switch>
             <Route exact path="/" component={RequireAuth(Home, false)} />
             <Route exact path="/home" component={RequireAuth(Home, false)} />
-            <Route exact path="/contact" component={Contact} />
+            <Route
+              exact
+              path="/contact"
+              component={RequireAuth(Contact, false)}
+            />
             <Route exact path="/yoga" component={RequireAuth(Yoga, false)} />
-            <Route exact path="/basket" component={Basket} />
+            <Route exact path="/cgu" component={RequireAuth(CGU, false)} />
+            <Route exact path="/cgv" component={RequireAuth(CGV, false)} />
+            <Route
+              exact
+              path="/basket"
+              component={RequireAuth(Basket, false)}
+            />
             <Route exact path="/studio" component={RequireAuth(Studio, true)} />
             <Route
               exact
@@ -62,15 +76,42 @@ function App() {
               component={ChangePassword}
             />
             <Route exact path="/Register" component={Register} />
-            <Route exact path="/stage" component={Other} />
-            <Route exact path="/stage1" component={Stage1} />
-            <Route exact path="/stage2" component={StageGrece} />
-            <Route exact path="/non-authorize" component={NonAuth} />
+            <Route exact path="/stage" component={RequireAuth(Other, false)} />
+            <Route
+              exact
+              path="/stage1"
+              component={RequireAuth(Stage1, false)}
+            />
+            <Route
+              exact
+              path="/stage-gretz"
+              component={RequireAuth(StageGretz, false)}
+            />
+            <Route
+              exact
+              path="/stage-gretz2"
+              component={RequireAuth(StageGretz2, false)}
+            />
+            <Route
+              exact
+              path="/stage2"
+              component={RequireAuth(StageGrece, false)}
+            />
+            <Route
+              exact
+              path="/non-authorize"
+              component={RequireAuth(NonAuth, false)}
+            />
             <Route
               exact
               path="/paiement-succeed"
               component={RequireAuth(PaymentSuceed, false)}
             />
+            {/* <Route
+              exact
+              path="/paiement-test"
+              component={RequireAuth(PaymentTest, true)}
+            /> */}
             <Route exact path="/paiement" component={Paiment} />
             <Route
               exact

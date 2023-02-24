@@ -23,7 +23,6 @@ const BasketContainer = styled.div`
   padding: 30px;
   background-color: white;
   border-radius: 12px;
-  max-width: ${(props) => (props.isMobile ? "" : "50%")};
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
 `;
 

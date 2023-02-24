@@ -47,7 +47,6 @@ const ModalEditClasses = (props) => {
       })
       .catch((err) => console.log("erreur ajout cours", err));
   };
-  console.log("editItem", props.editItem);
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>

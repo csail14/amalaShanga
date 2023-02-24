@@ -11,10 +11,14 @@ const Orders = (props) => {
       id="uncontrolled-tab-example"
       className="mb-3"
     >
-      <Tab eventKey="home" title="Cours">
+      <Tab eventKey="home" tabClassName="admin-tab" title="Cours">
         <YogaOrders />
       </Tab>
-      <Tab eventKey="profile" title="Autres activités"></Tab>
+      <Tab
+        eventKey="profile"
+        tabClassName="admin-tab"
+        title="Autres activités"
+      ></Tab>
     </Tabs>
   );
 };

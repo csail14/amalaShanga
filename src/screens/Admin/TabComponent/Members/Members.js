@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Form from "react-bootstrap/Form";
 import { FaTrash, FaPen } from "react-icons/fa";
 import { getAllUser } from "../../../../utils/API/userApi";
 import { useMediaQuery } from "react-responsive";
@@ -12,6 +13,17 @@ const SubTitleContainer = styled.p`
   font-weight: 700;
   font-size: 20px;
   text-align: left;
+`;
+
+const TextContainer = styled.p`
+  color: grey;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 `;
 
 const InfoContainer = styled.div`
@@ -46,6 +58,7 @@ const AllInfoDetailsContainer = styled.div`
 
 const Members = (props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
+  const [searchName, setSearchName] = useState("");
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -78,46 +91,65 @@ const Members = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(members);
   return (
     <InfoContainer isMobile={isMobile}>
       <SubTitleContainer>Vos Membres </SubTitleContainer>
+      <TextContainer>
+        Filter par nom du membre :{" "}
+        <Form.Control
+          type="text"
+          style={{ width: "fit-content" }}
+          value={searchName}
+          onChange={(e) => {
+            setSearchName(e.target.value);
+          }}
+        />
+      </TextContainer>
       {members &&
         members.map((item) => {
-          return (
-            <AllInfoDetailsContainer
-              key={item.id}
-              className="onHoverIsBorderGrey"
-            >
-              <InfoDetailsContainer>
-                <b>Nom : </b>
-                {item.lastName}
-              </InfoDetailsContainer>
-              <InfoDetailsContainer>
-                <b>Prénom : </b> {item.firstName}
-              </InfoDetailsContainer>
-              <InfoDetailsContainer>
-                <b>Date de naissance :</b> {moment(item.birthdate).format("LL")}
-              </InfoDetailsContainer>
-              <InfoDetailsContainer>
-                <b>Email :</b> {item.email}
-              </InfoDetailsContainer>
-              <InfoDetailsContainer>
-                <b>Cotisation payée :</b> {item.isMember === 1 ? "Oui" : "Non"}
-              </InfoDetailsContainer>
-              <InfoDetailsContainer>
-                <b>Date du dernier payment :</b>{" "}
-                {moment(item.last_paiement_cotisation_date).format("LL")}
-              </InfoDetailsContainer>
+          if (
+            item.firstName.toLowerCase().includes(searchName.toLowerCase()) ||
+            item.lastName.toLowerCase().includes(searchName.toLowerCase())
+          ) {
+            return (
+              <AllInfoDetailsContainer
+                key={item.id}
+                className="onHoverIsBorderGrey"
+              >
+                <InfoDetailsContainer>
+                  <b>Nom : </b>
+                  {item.lastName}
+                </InfoDetailsContainer>
+                <InfoDetailsContainer>
+                  <b>Prénom : </b> {item.firstName}
+                </InfoDetailsContainer>
+                <InfoDetailsContainer>
+                  <b>Date de naissance :</b>{" "}
+                  {moment(item.birthdate).format("LL")}
+                </InfoDetailsContainer>
+                <InfoDetailsContainer>
+                  <b>Email :</b> {item.email}
+                </InfoDetailsContainer>
+                <InfoDetailsContainer>
+                  <b>Cotisation payée :</b>{" "}
+                  {item.isMember === 1 ? "Oui" : "Non"}
+                </InfoDetailsContainer>
+                <InfoDetailsContainer>
+                  <b>Date du dernier payment :</b>{" "}
+                  {moment(item.last_paiement_cotisation_date).format("LL")}
+                </InfoDetailsContainer>
 
-              <InfoDetailsContainer>
-                <FaPen
-                  style={{ cursor: "pointer", marginLeft: 20 }}
-                  onClick={() => handleShowEdit(item)}
-                />
-              </InfoDetailsContainer>
-            </AllInfoDetailsContainer>
-          );
+                <InfoDetailsContainer>
+                  <FaPen
+                    style={{ cursor: "pointer", marginLeft: 20 }}
+                    onClick={() => handleShowEdit(item)}
+                  />
+                </InfoDetailsContainer>
+              </AllInfoDetailsContainer>
+            );
+          } else {
+            return null;
+          }
         })}
       <ModalEditMembers
         show={showEdit}

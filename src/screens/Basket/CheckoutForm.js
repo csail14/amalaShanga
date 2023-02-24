@@ -41,13 +41,13 @@ export default function CheckoutForm(props) {
       setPaymentIntent(paymentIntent);
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment succeeded!");
+          setMessage("Paiement reussi !");
           break;
         case "processing":
-          setMessage("Your payment is processing.");
+          setMessage("Paiement en cours.");
           break;
         case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
+          setMessage("");
           break;
         default:
           setMessage("Something went wrong.");
@@ -71,7 +71,7 @@ export default function CheckoutForm(props) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/paiement-succeed",
+        return_url: "https://www.amalasangha.fr/paiement-succeed",
       },
     });
 

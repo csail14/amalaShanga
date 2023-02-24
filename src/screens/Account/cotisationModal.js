@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { createPaiement } from "../../utils/API/paiementApi";
 import { useMediaQuery } from "react-responsive";
 import CheckoutForm from "../Basket/CheckoutForm";
+import { Link } from "react-router-dom";
 
 const stripePromise = loadStripe(process.env.REACT_APP_ENV_STIPE_KEY);
 
@@ -57,7 +58,12 @@ const ModifyPersonalInfoModal = (props) => {
         <Modal.Title>Devenir Membre</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {" "}
+        <p>
+          En continuant ce paiement vous acceptez les{" "}
+          <Link to="/cgv">
+            <strong>Conditions générales de vente</strong>
+          </Link>
+        </p>
         <BasketContainer isMobile={isMobile}>
           <BasketTitle>Paiement par carte bancaire</BasketTitle>
           {clientSecret && (

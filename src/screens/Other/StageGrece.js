@@ -11,6 +11,7 @@ import Button from "react-bootstrap/Button";
 import { useMediaQuery } from "react-responsive";
 import ModalSubscribe from "./ModalSubscribe";
 import SentSubscribeModal from "./SentSubscribeModal";
+import { underline } from "@cloudinary/url-gen/qualifiers/textDecoration";
 
 const MainContainer = styled.div`
   margin-top: ${(props) => (props.isMobile ? "" : "250px")};
@@ -106,8 +107,7 @@ const Other = () => {
             dans la mer Egée, contempler la beauté des paysages, respirez la
             pureté de l’air, ressentir l’énergie tellurique et spirituelle de
             cette île, savourer une cuisine saine et délicieuse, tout en
-            pratiquant le yoga et la méditation, accompagnée par mon amie Athéna
-            , professeur de yoga à Patmos et moi-même.
+            pratiquant le yoga et la méditation, accompagnée par moi-même.
           </p>
           <p>
             Vous allez vous laissez surprendre l'émerveillement et l'inspiration
@@ -217,8 +217,9 @@ const Other = () => {
 
           <h2 style={{ color: "#8dbad3", fontWeight: "bold" }}>Inscription</h2>
           <p>Veuillez envoyer votre intérêt à cette retraite par e-mail à</p>
-          <p>Frédérique : frederique@yogapsy.fr</p>
-          <p>Athéna : patmosretreats@gmail.com</p>
+          <p style={{ textDecoration: "underline" }}>
+            <a href="mailto:frederique@yogapsy.fr">frederique@yogapsy.fr </a>
+          </p>
           <p>
             Vous recevrez ensuite un formulaire d'inscription à remplir, une
             lettre de bienvenue avec des informations plus détaillées et des
@@ -228,7 +229,7 @@ const Other = () => {
             Nous avons hâte d'être dans ce lieu sacré avec vous en septembre
             prochain.
           </p>
-          <p>Athéna et Frédérique</p>
+          <p>Frédérique</p>
 
           {/* <p><a href="https://www.airbnb.fr/rooms/17870638?guests=1&adults=1&s=67&unique_share_id=264363ce-0708-443a-a1a1-2bb0c786ea03" target:"_blank"> Hébergement : au gîte Clément à Pruneyrolles</a></p> */}
 
@@ -294,8 +295,11 @@ const Other = () => {
               </b>
             </p>
             <ul>
-              <li>Frédérique : frederique@yogapsy.fr</li>
-              <li>Athéna : patmosretreats@gmail.com</li>
+              <li style={{ textDecoration: "underline" }}>
+                <a href="mailto:frederique@yogapsy.fr">
+                  frederique@yogapsy.fr{" "}
+                </a>
+              </li>
             </ul>{" "}
           </div>
         </SideBar>

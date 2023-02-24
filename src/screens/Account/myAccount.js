@@ -10,6 +10,7 @@ import ModifyPersonalInfoModal from "./modifyPersonalInfoModal";
 import CotisationoModal from "./cotisationModal";
 import { isMemberCheck } from "../../service/userService";
 import Fond3 from "../../assets/imageFond3.jpeg";
+import { getActivitiesById } from "../../utils/API/activitiesApi";
 require("moment/locale/fr.js");
 
 const MainContainer = styled.div`
@@ -62,6 +63,7 @@ const MyAccount = (props) => {
   const [orderDetails, setOrderDetails] = useState(null);
   const [showModifyInfoModal, setShowModifyInfoModal] = useState(null);
   const [showCotisationModal, setShowCotisationModal] = useState(null);
+  const [directClassInfo, setDirectClassInfo] = useState(null);
   const userDetails = props.user && props.user.infos;
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
 
@@ -79,6 +81,34 @@ const MyAccount = (props) => {
       })
       .catch((error) => console.log(error));
   }, [userDetails]);
+
+  useEffect(() => {
+    getActivitiesById(5).then((res) => {
+      setDirectClassInfo(res?.result);
+    });
+  }, []);
+  const isDirectClassActiv = directClassInfo && directClassInfo.isAvailable;
+  const isDirectClassPaid =
+    directClassInfo &&
+    directClassInfo.class_id &&
+    orderDetails &&
+    orderDetails.filter(
+      (item) => item.product_id === directClassInfo.class_id
+    ) &&
+    orderDetails.filter((item) => item.product_id === directClassInfo.class_id)
+      .length > 0;
+
+  const directClass =
+    directClassInfo &&
+    directClassInfo.class_id &&
+    orderDetails &&
+    orderDetails.filter(
+      (item) => item.product_id === directClassInfo.class_id
+    ) &&
+    orderDetails.filter(
+      (item) => item.product_id === directClassInfo.class_id
+    )[0];
+
   return (
     <MainContainer
       style={{
@@ -92,6 +122,7 @@ const MyAccount = (props) => {
       </TitleContainer>
       <InfoContainer isMobile={isMobile}>
         <SubTitleContainer>Mes informations </SubTitleContainer>
+
         <AllInfoDetailsContainer style={{ justifyContent: "center" }}>
           {/* <img
             style={{
@@ -149,44 +180,81 @@ const MyAccount = (props) => {
               style={{
                 width: "fit-content",
                 margin: "5px",
-                backgroundColor: "#a4d5ff6b",
+                backgroundColor: "#b186d0",
                 border: "0",
               }}
               onClick={handleShowCotisationModal}
             >
-              Devenir membre
+              Payer ma cotisation
             </Button>
           )}
         </div>
       </InfoContainer>
+      {isDirectClassPaid && isDirectClassActiv === 1 && (
+        <InfoContainer isMobile={isMobile}>
+          <SubTitleContainer>Mon prochain cours en direct </SubTitleContainer>
+          <div style={{ color: "black", textAlign: "left" }}>
+            Le lien du cours ne s'activera que 15 min avant le début du cours
+          </div>
+          <a href={directClass.details.url} target="_blank" rel="noreferrer">
+            <AllInfoDetailsContainer>
+              <InfoDetailsContainer>
+                <b>Nom :</b> {directClass.details.name}
+              </InfoDetailsContainer>
+              <InfoDetailsContainer>
+                <b>Date du cours :</b>{" "}
+                {moment(directClassInfo.date).format("LLLL")}
+              </InfoDetailsContainer>
+              <InfoDetailsContainer>
+                <b>Date d'achat :</b>{" "}
+                {moment(directClass.details.creation_date).format("LL")}
+              </InfoDetailsContainer>
+            </AllInfoDetailsContainer>
+          </a>
+        </InfoContainer>
+      )}
+
       <InfoContainer isMobile={isMobile}>
-        <SubTitleContainer>Mes cours ou activités </SubTitleContainer>
+        <SubTitleContainer>
+          Mes cours en replay des trois derniers mois
+        </SubTitleContainer>
         {orderDetails &&
-          orderDetails.map((order) => {
-            return (
-              <Link
-                to={{
-                  pathname: "studio",
-                  state: {
-                    url: order && order.details && order.details.url,
-                  },
-                }}
-              >
-                <AllInfoDetailsContainer className="onHoverIsGrey">
-                  <InfoDetailsContainer>
-                    <b>Nom :</b> {order && order.details && order.details.name}
-                  </InfoDetailsContainer>
-                  <InfoDetailsContainer>
-                    <b>Date d'achat :</b>{" "}
-                    {moment(order && order.creation_date).format("LL")}
-                  </InfoDetailsContainer>
-                  <InfoDetailsContainer>
-                    <b>Valide jusqu'au :</b> date
-                  </InfoDetailsContainer>
-                </AllInfoDetailsContainer>
-              </Link>
-            );
-          })}
+          orderDetails
+            .filter((item) => item.details && item.details.type === "replay")
+            .map((order, index) => {
+              const threeMonthBefore = new Date(
+                new Date().setMonth(new Date().getMonth() - 3)
+              );
+              if (new Date(order.creation_date) < threeMonthBefore) {
+                return null;
+              } else {
+                return (
+                  <Link
+                    key={index}
+                    to={{
+                      pathname: "studio",
+                      state: {
+                        url: order && order.details && order.details.url,
+                      },
+                    }}
+                  >
+                    <AllInfoDetailsContainer className="onHoverIsGrey">
+                      <InfoDetailsContainer>
+                        <b>Nom :</b>{" "}
+                        {order && order.details && order.details.name}
+                      </InfoDetailsContainer>
+                      <InfoDetailsContainer>
+                        <b>Date d'achat :</b>{" "}
+                        {moment(order && order.creation_date).format("LL")}
+                      </InfoDetailsContainer>
+                      <InfoDetailsContainer>
+                        <b>Valide jusqu'au :</b> date
+                      </InfoDetailsContainer>
+                    </AllInfoDetailsContainer>
+                  </Link>
+                );
+              }
+            })}
       </InfoContainer>
       <ModifyPersonalInfoModal
         show={showModifyInfoModal}
@@ -195,8 +263,8 @@ const MyAccount = (props) => {
       />
       <CotisationoModal
         show={showCotisationModal}
-        handleClose={handleShowCotisationModal}
-        handleShow={handleCloseCotisationModal}
+        handleClose={handleCloseCotisationModal}
+        handleShow={handleShowCotisationModal}
       />
     </MainContainer>
   );

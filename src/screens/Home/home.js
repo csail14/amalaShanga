@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
@@ -9,6 +9,10 @@ import imageFond1 from "../../assets/imageFond1.jpeg";
 import imageFond2 from "../../assets/shiva.jpg";
 import Button from "react-bootstrap/Button";
 import { useMediaQuery } from "react-responsive";
+import { getActivitiesById } from "../../utils/API/activitiesApi";
+import { getOrderByClientByProduct } from "../../utils/API/orderApi";
+import RegisterDirectClassModal from "./RegisterDirectClassModal";
+import { addInBasket } from "../../actions/basket/basketActions";
 
 const MainContainer = styled.div`
   width: ${(props) => (props.isMobile ? "" : "50%")};
@@ -25,6 +29,8 @@ const TitleContainer = styled.p`
 
 const ButtonContainer = styled.div`
   display: flex;
+  flex-direction: ${(props) => (props.isMobile ? "column" : "rox")};
+  gap: 1;
   align-items: left;
   padding: 0 30px;
 `;
@@ -40,10 +46,74 @@ const Home = (props) => {
     getStart();
   }, []);
 
+  const [directClassInfo, setDirectClassInfo] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  useEffect(() => {
+    getActivitiesById(5).then((res) => {
+      setDirectClassInfo(res?.result);
+    });
+  }, []);
+
+  const directClass =
+    props.yogaClasses &&
+    directClassInfo &&
+    props.yogaClasses.array &&
+    props.yogaClasses.array.filter(
+      (item) => item.id === directClassInfo.class_id
+    )[0];
+
   const isMobile = useMediaQuery({ query: "(max-width: 975px)" });
 
   const slideImages = [imageFond1, imageFond2];
   let history = useHistory();
+
+  const buyClasses = (item) => {
+    if (props.user && props.user.infos) {
+      getOrderByClientByProduct(props.user.infos.id, item.id).then((res) => {
+        const isAlreadyBuy =
+          res && res.data && res.data.result && res.data.result.length > 0;
+        const isLogged = props.user && props.user.isLogged;
+        const isMember =
+          isLogged && props.user.infos && props.user.infos.isMember;
+        const isAlreadyInBasket =
+          props.basket &&
+          props.basket.products &&
+          props.basket.products.includes(item);
+        if (!isLogged) {
+          setModalMessage(
+            "Vous devez vous connecter pour vous inscrire au cours."
+          );
+        } else if (!isMember) {
+          setModalMessage(
+            "Vous devez etre membre pour vous inscrire au cours."
+          );
+        } else if (isAlreadyInBasket) {
+          setModalMessage("Ce cours est déjà dans votre panier.");
+        } else if (isAlreadyBuy) {
+          setModalMessage(
+            "Vous êtes déjà inscrit à ce cours. Rendez-vous dans la rubrique 'Mon compte' pour le consulter."
+          );
+        } else {
+          setModalMessage("Votre cours a bien été ajouté au panier.");
+        }
+        if (isLogged && isMember && !isAlreadyBuy & !isAlreadyInBasket) {
+          props.addInBasket(item);
+          handleShowModal();
+        } else {
+          handleShowModal();
+        }
+      });
+    } else {
+      setModalMessage("Vous devez vous connecter vous inscrire.");
+      handleShowModal();
+    }
+  };
+
   return (
     <Fade arrows={false} easing="ease" indicators={true}>
       {slideImages.map((slideImage, index) => (
@@ -65,6 +135,9 @@ const Home = (props) => {
               <TitleContainer>
                 Bienvenue sur le site de Amala Sangha !
               </TitleContainer>
+              {/* <button onClick={() => history.push("paiement-test")}>
+                TEST CAMILLE
+              </button> */}
               <TextContainer>
                 <p>
                   Amala Sangha vous accompagne à travers la philosophie du yoga
@@ -81,15 +154,37 @@ const Home = (props) => {
                   Soi pour aller vers l’épanouissement de l’être.
                 </p>
               </TextContainer>
-              <ButtonContainer>
-                <Button
-                  id="primary-btn"
-                  variant="primary"
-                  onClick={() => history.push("/register")}
-                >
-                  Créer un compte
-                </Button>
+              <ButtonContainer isMobile={isMobile}>
+                {props.user && !props.user.isLogged && (
+                  <Button
+                    id="primary-btn"
+                    variant="primary"
+                    onClick={() => history.push("/register")}
+                    style={{
+                      marginRight: isMobile ? 0 : 10,
+                      marginBottom: isMobile ? 10 : 0,
+                    }}
+                  >
+                    Créer un compte
+                  </Button>
+                )}
+                {directClassInfo && directClassInfo.isAvailable === 1 && (
+                  <Button
+                    id="primary-btn"
+                    variant="primary"
+                    onClick={() => buyClasses(directClass)}
+                    style={{ padding: 20, fontSize: 25 }}
+                  >
+                    M'inscrire au prochain cours en direct
+                  </Button>
+                )}
               </ButtonContainer>
+              <RegisterDirectClassModal
+                show={showModal}
+                handleClose={handleCloseModal}
+                handleShow={handleShowModal}
+                modalMessage={modalMessage}
+              />
             </MainContainer>
           </div>
         </div>
@@ -98,10 +193,13 @@ const Home = (props) => {
   );
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { addInBasket };
 
 const mapStateToProps = (store) => {
-  return {};
+  return {
+    yogaClasses: store.yogaClasses,
+    user: store.user,
+    basket: store.basket,
+  };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

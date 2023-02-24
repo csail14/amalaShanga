@@ -19,3 +19,17 @@ export const createPaiement = (body) => {
       return err;
     });
 };
+
+export const createPaiementTest = (body) => {
+  return axios
+    .post(config.api_url + "create-payment-intent-test", {
+      body: body,
+      headers: headers,
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      return err;
+    });
+};

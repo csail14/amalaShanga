@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Fond3 from "../../assets/imageFond3.jpeg";
-import yoga_default_image from "../../assets/yoga_default_image.jpeg";
+import yoga_default_image from "../../assets/shiva.jpg";
 import Minutes from "../../assets/30minutes.png";
 import Debutant from "../../assets/debutant.jpeg";
 import Salutation from "../../assets/salutation.jpg";
@@ -77,7 +77,6 @@ const Yoga = (props) => {
     props.yogaClasses &&
     props.yogaClasses.array &&
     props.yogaClasses.array.sort(function (a, b) {
-      console.log();
       return new Date(b.creation_date) - new Date(a.creation_date);
     });
 
@@ -221,7 +220,7 @@ const Yoga = (props) => {
               <Link
                 to={{
                   pathname: "studio",
-                  state: { url: "https://www.youtube.com/embed/gHKy6LhXLs4" },
+                  state: { url: "https://www.youtube.com/embed/dxCB_jktrhw" },
                 }}
               >
                 Essayer ce cours gratuit

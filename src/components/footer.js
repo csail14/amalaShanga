@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
@@ -85,7 +85,16 @@ const Header = (props) => {
             </FooterInfoContainer>
           </Container>
         )}
-        <Container style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Container
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Link to="/cgu" style={{ textDecoration: "underline" }}>
+            {" "}
+            <CopyrightContainer>CGU</CopyrightContainer>
+          </Link>
           <CopyrightContainer>© Copyright 2021 AmalaSangha</CopyrightContainer>
         </Container>
       </Navbar>

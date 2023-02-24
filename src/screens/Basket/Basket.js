@@ -3,7 +3,7 @@ import Fond3 from "../../assets/imageFond3.jpeg";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {
   cleanBasket,
   deleteInBasket,
@@ -103,7 +103,12 @@ const Basket = (props) => {
                 <p> Total</p>
                 <p> {calculTotalPrice()} €</p>
               </Product>
-
+              <p>
+                En cliquant sur finaliser l'achat, j'accepte les{" "}
+                <Link to="/cgv">
+                  <strong>Conditions générales de vente</strong>
+                </Link>
+              </p>
               <ButtonContainer>
                 <Button variant="primary" onClick={goToPay}>
                   Finaliser l'achat

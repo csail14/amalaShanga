@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import meditation from "../../assets/meditation.jpeg";
@@ -48,11 +49,19 @@ const Home = (props) => {
       <TitleContainer>Suivez la méditation du mois</TitleContainer>
       <InfoContainer>
         <TextContainer>
-          <a href={meditationUrl} target="_blank">
+          <Link
+            to={{
+              pathname: "studio",
+              state: {
+                url: meditationUrl,
+              },
+            }}
+          >
+            {" "}
             <Button id="primary-btn" variant="primary">
               Je medite
             </Button>
-          </a>
+          </Link>
         </TextContainer>
       </InfoContainer>
     </MainContainer>

@@ -40,16 +40,36 @@ const Header = (props) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse collapseOnSelect id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link className="header-link" href="/home">
+              <Nav.Link
+                eventKey="1"
+                className="header-link"
+                as={Link}
+                to="/home"
+              >
                 Accueil
               </Nav.Link>
-              <Nav.Link className="header-link" href="/yoga">
+              <Nav.Link
+                eventKey="2"
+                className="header-link"
+                as={Link}
+                to="/yoga"
+              >
                 Cours de Yoga
               </Nav.Link>
-              <Nav.Link className="header-link" href="/stage">
+              <Nav.Link
+                eventKey="3"
+                className="header-link"
+                as={Link}
+                to="/stage"
+              >
                 Stages
               </Nav.Link>
-              <Nav.Link className="header-link" href="/meditation">
+              <Nav.Link
+                eventKey="4"
+                className="header-link"
+                as={Link}
+                to="/meditation"
+              >
                 Meditation
               </Nav.Link>
               <Nav.Link
@@ -62,28 +82,50 @@ const Header = (props) => {
             </Nav>
             <Nav>
               {props.user && !props.user.isLogged && (
-                <Nav.Link className="header-link" href="/login">
+                <Nav.Link
+                  className="header-link"
+                  eventKey="5"
+                  as={Link}
+                  to="/login"
+                >
                   Se connecter
                 </Nav.Link>
               )}
               {props.user && !props.user.isLogged && (
-                <Nav.Link className="header-link" href="/register">
+                <Nav.Link
+                  eventKey="6"
+                  className="header-link"
+                  as={Link}
+                  to="/register"
+                >
                   Creer un compte
                 </Nav.Link>
               )}
               {props.user && props.user.isLogged && (
-                <Nav.Link className="header-link" href="/myAccount">
+                <Nav.Link
+                  eventKey="7"
+                  className="header-link"
+                  as={Link}
+                  to="/myAccount"
+                >
                   Mon compte
                 </Nav.Link>
               )}
-              <Nav.Link className="header-link" href="/contact">
+              <Nav.Link
+                eventKey="8"
+                className="header-link"
+                as={Link}
+                to="/contact"
+              >
                 Contact
               </Nav.Link>
 
               {props.user && props.user.isLogged && (
                 <Nav.Link
                   className="header-link"
-                  href="/basket"
+                  eventKey="9"
+                  as={Link}
+                  to="/basket"
                   style={{ flexWrap: "nowrap" }}
                 >
                   Mon panier{" "}
@@ -104,7 +146,7 @@ const Header = (props) => {
                 </Nav.Link>
               )}
               {props.user && props.user.isLogged && (
-                <Nav.Link className="header-link" href="/logout">
+                <Nav.Link className="header-link" as={Link} to="/logout">
                   Se deconnecter
                 </Nav.Link>
               )}

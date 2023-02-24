@@ -68,7 +68,6 @@ const Register = (props) => {
         password1: password,
         password2: password2,
       };
-      console.log(key_id);
       changePassword(data, key_id).then((res) => {
         if (res.status === 200) {
           setSuccess(true);

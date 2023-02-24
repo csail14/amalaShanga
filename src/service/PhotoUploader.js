@@ -9,7 +9,6 @@ const PhotoUploader = (props) => {
       tags: [tag],
       uploadPreset: "yedazovb",
     };
-    console.log(uploadOptions);
 
     openUploadWidget(uploadOptions, (error, photos) => {
       if (!error) {

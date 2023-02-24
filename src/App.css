@@ -100,6 +100,10 @@ a {
   color: white;
 }
 
+.admin-tab {
+  color: black !important;
+}
+
 @media only screen and (max-width: 975px) {
   .react-slideshow-container {
     min-width: 100vw;

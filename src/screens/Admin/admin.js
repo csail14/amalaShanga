@@ -4,10 +4,12 @@ import styled from "styled-components";
 import Orders from "./TabComponent/orders";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import Classes from "./TabComponent/Yoga/classes";
-import Activites from "./TabComponent/activities";
+import Classes from "./TabComponent/YogaReplay/classes";
+import Meditation from "./TabComponent/Meditation";
 import { useMediaQuery } from "react-responsive";
 import Members from "./TabComponent/Members/Members";
+import YogaDirectList from "./TabComponent/YogaDirect/YogaDirectList";
+import Wiki from "./TabComponent/Wiki/Wiki";
 
 const MainContainer = styled.div`
   padding-top: ${(props) => (props.isMobile ? "100px" : "100px")};
@@ -31,17 +33,33 @@ const Home = (props) => {
         id="uncontrolled-tab-example"
         className="mb-3"
       >
-        <Tab eventKey="home" title="Cours">
+        <Tab
+          tabClassName="admin-tab"
+          eventKey="home"
+          title="Cours en replay"
+          style={{ color: "red" }}
+        >
           <Classes />
         </Tab>
-        <Tab eventKey="profile" title="Autres activités">
-          <Activites />
+        <Tab
+          tabClassName="admin-tab"
+          eventKey="direct"
+          title="Cours en direct"
+          style={{ color: "red" }}
+        >
+          <YogaDirectList />
         </Tab>
-        <Tab eventKey="other" title="Commandes">
+        <Tab tabClassName="admin-tab" eventKey="profile" title="Méditation">
+          <Meditation />
+        </Tab>
+        <Tab tabClassName="admin-tab" eventKey="other" title="Commandes">
           <Orders />
         </Tab>
-        <Tab eventKey="users" title="Membres">
+        <Tab tabClassName="admin-tab" eventKey="users" title="Membres">
           <Members />
+        </Tab>
+        <Tab tabClassName="admin-tab" eventKey="wiki" title="Comment faire ?">
+          <Wiki />
         </Tab>
       </Tabs>
     </MainContainer>

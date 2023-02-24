@@ -9,51 +9,39 @@ const ModalSubscribe = (props) => {
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [transport, setTransport] = useState("");
-  const [room, setRoom] = useState("Chambre double 300€");
   const [comments, setComments] = useState("");
   const [error, setError] = useState("");
-  const stageTitle = "Stage Yoga Juillet";
+  const stageTitle = "Stage Gretz 26-29 Janvier";
   const isLogged = props.user && props.user.isLogged;
   const isMember = isLogged && props.user.infos && props.user.infos.isMember;
   const isAuthorize = isLogged && isMember;
 
   const submit = () => {
     let data = {
-      lastName: lastName,
-      firstName: firstName,
+      lastName: props.user.infos.firstName,
+      firstName: props.user.infos.lastName,
       stageTitle: stageTitle,
-      email: email,
-      transport: transport,
-      room: room,
+      email: props.user.infos.email,
       comments: comments,
     };
-    if (
-      lastName === "" ||
-      firstName === "" ||
-      email === "" ||
-      transport === ""
-    ) {
-      setError("Veuillez remplir tous les champs marqués d'une astérisque");
-    } else {
-      subscribeStage(data)
-        .then((res) => {
-          setError("");
-          if (res.status === 200) {
-            props.handleClose();
-            props.handleShowModalValidation();
-          } else {
-            setError("Une erreur s'est produite");
-          }
-        })
-        .catch((error) => console.log(error));
-    }
+
+    subscribeStage(data)
+      .then((res) => {
+        setError("");
+        if (res.status === 200) {
+          props.handleClose();
+          props.handleShowModalValidation();
+        } else {
+          setError("Une erreur s'est produite");
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>M'inscrire au stage</Modal.Title>
+        <Modal.Title>M'inscrire au stage du 26 - 29 Janvier 2023</Modal.Title>
       </Modal.Header>
       {isAuthorize ? (
         <Modal.Body>
@@ -64,7 +52,8 @@ const ModalSubscribe = (props) => {
                 type="text"
                 required
                 onChange={(e) => setLastName(e.target.value)}
-                placeholder="Entrer votre nom *"
+                disabled
+                value={props.user.infos.lastName}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -72,7 +61,8 @@ const ModalSubscribe = (props) => {
               <Form.Control
                 onChange={(e) => setFirstName(e.target.value)}
                 type="text"
-                placeholder="Entrer votre prénom *"
+                disabled
+                value={props.user.infos.firstName}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -80,20 +70,34 @@ const ModalSubscribe = (props) => {
               <Form.Control
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
-                placeholder="Entrer votre email * "
+                disabled
+                value={props.user.infos.email}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            {/* <Form.Group className="mb-3">
               <Form.Control
                 as="textarea"
                 onChange={(e) => setTransport(e.target.value)}
                 rows={3}
                 placeholder="Précisez ici comment vous vous rendez sur le lieu du stage *"
               />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className="mb-3">
-              <Form.Label>Votre chambre</Form.Label>
-              <Form.Select
+              <Form.Label>
+                <b>Hébergement</b>
+              </Form.Label>
+              <Form.Label>
+                Pension complète en chambre de 2/3 personnes. 180 € à régler par
+                chèque sur place.
+              </Form.Label>
+              <Form.Label>
+                <b>Frais d'inscription</b>
+              </Form.Label>
+              <Form.Label>
+                300 € à régler auprès de l'associtaion, nous vous contacterons
+                pour les modalités de paiement.
+              </Form.Label>
+              {/* <Form.Select
                 onChange={(e) => setRoom(e.target.value)}
                 aria-label="Default select example"
               >
@@ -104,14 +108,14 @@ const ModalSubscribe = (props) => {
                   Chambre en dortoir 275€
                 </option>
                 <option value={"Chambre seule 400€"}>Chambre seule 400€</option>
-              </Form.Select>
+              </Form.Select> */}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Control
                 as="textarea"
                 onChange={(e) => setComments(e.target.value)}
                 rows={3}
-                placeholder="Avez vous un détail à apporter ? "
+                placeholder="Avez vous une question ? "
               />
             </Form.Group>
           </Form>
