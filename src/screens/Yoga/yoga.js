@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import Fond3 from "../../assets/imageFond3.jpeg";
+import Fond3 from "../../assets/lotus.jpeg";
 import yoga_default_image from "../../assets/shiva.jpg";
 import Minutes from "../../assets/30minutes.png";
 import Debutant from "../../assets/debutant.jpeg";
@@ -41,8 +41,8 @@ const Yoga = (props) => {
         const isAlreadyBuy =
           res && res.data && res.data.result && res.data.result.length > 0;
         const isLogged = props.user && props.user.isLogged;
-        const isMember =
-          isLogged && props.user.infos && props.user.infos.isMember;
+        const isMember = true;
+        // isLogged && props.user.infos && props.user.infos.isMember;
         const isAlreadyInBasket =
           props.basket &&
           props.basket.products &&
@@ -84,7 +84,7 @@ const Yoga = (props) => {
     <MainContainer
       isMobile={isMobile}
       style={{
-        backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${Fond3})`,
+        backgroundImage: `url(${Fond3})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -93,7 +93,7 @@ const Yoga = (props) => {
         Voici la liste des cours de yoga mis à disposition
       </TitleContainer> */}
       <InfoContainer>
-        <Card
+        {/* <Card
           style={{
             width: "18rem",
             boxShadow: " 0px 26px 70px rgba(0, 0, 0, 0.15)",
@@ -139,7 +139,7 @@ const Yoga = (props) => {
               </Link>
             </Button>
           </Card.Body>
-        </Card>
+        </Card> */}
         <Card
           style={{
             width: "18rem",

@@ -94,13 +94,16 @@ const Other = () => {
       <Content isMobile={isMobile}>
         <ArticleContainer isMobile={isMobile}>
           <TitleContainer>
-            Rencontre 2 : « Le yoga, un chemin de stabilité dans un monde agité
-            »
+            Rencontre 3 : « Ajuster ma vie en fonction de mon Soi »
           </TitleContainer>
           <SubTitleContainer>Au Centre Védique de Gretz</SubTitleContainer>
-          <SubTitleContainer>Du 28 avril au 1er mai 2023</SubTitleContainer>
           <SubTitleContainer>
-            Animée par <b>Frédérique Saillard</b>
+            Du jeudi 7 septembre au soir au dimanche 10 septembre après-midi
+            2023
+          </SubTitleContainer>
+          <SubTitleContainer>
+            Animée par <b>Frédérique Saillard</b>, Praticienne en psychothérapie
+            et en yogathérapie
           </SubTitleContainer>
           <p></p>
           <p>
@@ -108,18 +111,19 @@ const Other = () => {
             un travail en propose un travail en yoga et thérapie. La philosophie
             du yoga, la pratique du yoga, est un chemin de transformation et est
             en cela thérapeutique. <br />
-            La première retraite s’est tenue fin janvier, et était centrée sur
-            la découverte du Soi : qui est le SOI et comment me relier à mon
-            SOI. <br />
-            Cette deuxième retraite à l’ashram de Gretz a pour thématique :{" "}
-            <b>« Le yoga, un chemin de stabilité dans un monde agité »</b>
+            Les deux premières retraites se sont tenues en janvier et en mai.{" "}
+            <br />
+            Cette troisième retraite à l’ashram de Gretz a pour thématique :{" "}
+            <b>« « Ajuster ma vie en fonction avec mon Soi » »</b>
             <br />
           </p>
           <p>
-            Trouver la Paix intérieure en retraite de yoga c’est bien, mais
-            savoir garder cette paix intérieure dans nos activités quotidiennes,
-            là où la vie nous a posé, c’est un vrai challenge qui transforme
-            notre rapport à soi, aux autres, au monde.
+            C’est la rentrée, un moment propice pour organiser ma vie en
+            cohérence avec qui je suis véritablement. Nous travaillerons dans
+            les postures , la respiration, la méditation et l’enseignement de la
+            philosophie du yoga et les partages du groupe , pour nous aider à
+            discerner ce qui est juste pour soi et ce qui ne l’est pas, ou qui
+            ne l’est plus, et ainsi organiser l’année à venir avec justesse.
           </p>
           <p>
             J’anime depuis plusieurs années des groupes de thérapie et par
@@ -165,7 +169,7 @@ const Other = () => {
           </p>
           <ul>
             <li>
-              <b>Vendredi 28 avril :</b>
+              <b>Jeudi 7 septembre :</b>
               <ul>
                 <li>A partir de 17h : Accueil</li>
                 <li>19h : Diner et karma yoga</li>
@@ -177,24 +181,19 @@ const Other = () => {
             </li>
             <p></p>
             <li>
-              <b>Samedi 29 avril :</b>
+              <b>Vendredi 8 septembre :</b>
               <ul>
-                <li>7h : Pratique du yoga</li>
+                <li>7h à 8h : Pratique du yoga</li>
                 <li>8h : Petit déjeuner et karma Yoga</li>
                 <li>
                   9h30 : Présentation et définition des objectifs de chacun
                 </li>
                 <li>10h45 : Pratique de Pranayama et Méditation</li>
                 <li>12h : Déjeuner et karma yoga</li>
-                <li>
-                  14h : Enseignement « Le yoga, un chemin de stabilité dans un
-                  monde agité » - Partage
-                </li>
+                <li>14h : Enseignement - Partage</li>
                 <li>15h30 : Pratique de Yoga</li>
-                <li>16h30 : Pause Goûter</li>
-                <li>
-                  17h à 18h : Temps de libre / silence ou conférence de l’ashram
-                </li>
+                <li>16h30 à 17h : Pause Goûter</li>
+                <li>17h à 18h : Temps de libre / silence</li>
                 <li>18H à 19h : Pratique yoga nidra</li>
                 <li>19h : Diner et karma yoga</li>
                 <li>
@@ -204,23 +203,17 @@ const Other = () => {
             </li>
             <p></p>
             <li>
-              <b>Dimanche 30 avril :</b>
+              <b>Samedi 9 septembre :</b>
               <ul>
-                <li>7h : Pratique du yoga</li>
+                <li>7h à 8h : Pratique du yoga</li>
                 <li>8h : Petit déjeuner et karma Yoga</li>
-                <li>
-                  9h30 : Enseignement pour le 2ème weekend « Le yoga, un chemin
-                  de stabilité dans un monde agité » Partage
-                </li>
+                <li>9h30 : Enseignement - Partage</li>
                 <li>10h45 : Pratique de Pranayama et Méditation</li>
                 <li>12h : Déjeuner et karma yoga</li>
-                <li>14h : Temps libre </li>
-                <li>
-                  15h : Conférence sur le Soi avec Swami Atmarupananda,
-                  directeur spirituel de l’ashram.
-                </li>
+                <li>14h : Enseignement - Partage </li>
+                <li>15h30 : Pratique de Yoga</li>
                 <li>16h30 à 17h : Pause Goûter</li>
-                <li>17h à 18h30 : Enseignement et pratique yoga nidra</li>
+                <li>17h à 18h : Temps libre / silence</li>
                 <li>19h : Diner et karma yoga</li>
                 <li>
                   20h à 21h30 : Satsang – Bilan de la journée - Méditation
@@ -229,11 +222,12 @@ const Other = () => {
             </li>
             <p></p>
             <li>
-              <b> Lundi 1er mai :</b>
+              <b> Dimanche 10 septembre :</b>
               <ul>
                 <li>7h à 8h : Pratique du yoga</li>
                 <li>8h : Petit déjeuner et karma yoga</li>
                 <li>9h30 : Bilan des enseignements du week-end</li>
+                <li>10h45 : Pratique de Pranayama et Méditation</li>
                 <li>12h : Déjeuner</li>
                 <li>14h à 15h : Clôture du weekend : avec quoi je repars ?</li>
               </ul>
@@ -309,15 +303,8 @@ const Other = () => {
           <Date>
             {" "}
             <AiOutlineCalendar style={{ width: "20px", height: "20px" }} />{" "}
-            29,30 Avril - 1er Mai 2023
+            7,8,9,10 septembre 2023
           </Date>
-          {/* <Date>
-            {" "}
-            <MdEuroSymbol /> 200 €
-          </Date> */}
-          {/* <Date>
-            {" "}
-            <MdEuroSymbol />{" "} */}
           <Date>
             <GoLocation style={{ width: "20px", height: "20px" }} />{" "}
             <div style={{ textAlign: "left" }}>

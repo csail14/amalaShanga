@@ -30,6 +30,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-family: "Abel", sans-serif;
 }
 
 .indicators {
@@ -37,7 +38,7 @@
   gap: 20px;
   z-index: 11;
   position: absolute;
-  right: 50%;
+  right: 48.1%;
   margin-top: -30px !important;
 }
 .indicators .each-slideshow-indicator::before {
@@ -54,7 +55,7 @@
   color: white;
   font-weight: 700;
   padding: 10px;
-  background-color: #9ec2d7;
+  background-color: #385e70;
   border: none;
   box-shadow: 0px 2px 15px rgb(0 0 0 / 30%);
 }
@@ -73,7 +74,7 @@ a {
 }
 
 .color-nav {
-  background-color: #9ec2d7;
+  background-color: #385e70;
   box-shadow: 1px 1px 8px;
 }
 
@@ -98,6 +99,9 @@ a {
 
 .nav-link {
   color: white;
+  font-family: "Abel", sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
 }
 
 .admin-tab {

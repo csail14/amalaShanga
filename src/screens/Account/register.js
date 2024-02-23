@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ReCAPTCHA from "react-google-recaptcha";
 import { addUser } from "../../utils/API/userApi";
-import Fond3 from "../../assets/imageFond3.jpeg";
+import Fond3 from "../../assets/lotus.jpeg";
 import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`

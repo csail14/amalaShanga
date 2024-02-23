@@ -28,6 +28,8 @@ import ForgotPassWord from "./screens/Account/forgotPassword";
 import ChangePassword from "./screens/Account/ChangePassword";
 import StageGretz from "./screens/Other/StageGretz";
 import StageGretz2 from "./screens/Other/StageGretz2";
+import StageYogaEtRando from "./screens/Other/StageRando/StageYogaEtRando";
+import StageGretz3 from "./screens/Other/StageGretz3";
 function App() {
   const location = useLocation();
 
@@ -91,6 +93,17 @@ function App() {
               exact
               path="/stage-gretz2"
               component={RequireAuth(StageGretz2, false)}
+            />
+            <Route
+              exact
+              path="/stage-gretz-3"
+              component={RequireAuth(StageGretz3, false)}
+            />
+
+            <Route
+              exact
+              path="/stage-yoga-rando"
+              component={RequireAuth(StageYogaEtRando, false)}
             />
             <Route
               exact

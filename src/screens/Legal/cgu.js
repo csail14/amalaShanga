@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import Fond3 from "../../assets/imageFond3.jpeg";
+import Fond3 from "../../assets/lotus.jpeg";
 import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`

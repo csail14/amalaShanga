@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import "react-slideshow-image/dist/styles.css";
 import { getStart } from "../../utils/API/API";
 import { Fade } from "react-slideshow-image";
-import imageFond1 from "../../assets/imageFond1.jpeg";
+import imageFond1 from "../../assets/lotus.jpeg";
 import imageFond2 from "../../assets/shiva.jpg";
 import Button from "react-bootstrap/Button";
 import { useMediaQuery } from "react-responsive";
@@ -24,6 +24,15 @@ const TitleContainer = styled.p`
   font-weight: 700;
   font-size: 32px;
   padding: 30px;
+  padding-bottom: 0px;
+  text-align: left;
+`;
+
+const SubTitleContainer = styled.p`
+  color: white;
+  font-weight: 700;
+  font-size: 25px;
+  padding: 0px 30px;
   text-align: left;
 `;
 
@@ -133,16 +142,14 @@ const Home = (props) => {
           >
             <MainContainer isMobile={isMobile}>
               <TitleContainer>
-                Bienvenue sur le site de Amala Sangha !
+                Bienvenue sur Amala Sangha : le site des cours, stages et
+                retraites de yoga et méditation de Yogapsy !
               </TitleContainer>
+              <SubTitleContainer></SubTitleContainer>
               {/* <button onClick={() => history.push("paiement-test")}>
                 TEST CAMILLE
               </button> */}
               <TextContainer>
-                <p>
-                  Amala Sangha vous accompagne à travers la philosophie du yoga
-                  dans les 3 dimensions de l’être : corps, âme, esprit.
-                </p>
                 <p>
                   Les cours de yoga prennent soin du corps par la pratique de
                   postures ou asanas, de l’esprit notamment avec les exercices
@@ -150,8 +157,10 @@ const Home = (props) => {
                   temps de méditations, dyanas.
                 </p>
                 <p>
-                  Le corps et l’esprit sont au service de notre âme, de notre
-                  Soi pour aller vers l’épanouissement de l’être.
+                  La pratique régulière, ou Sadhana, accélère la transformation
+                  de votre être proposé dans les accompagnements Yogapsy vers
+                  l’émergence de votre nature véritable, votre Soi qui est paix
+                  amour et félicité.
                 </p>
               </TextContainer>
               <ButtonContainer isMobile={isMobile}>

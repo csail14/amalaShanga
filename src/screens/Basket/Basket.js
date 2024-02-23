@@ -1,5 +1,5 @@
 import React from "react";
-import Fond3 from "../../assets/imageFond3.jpeg";
+import Fond3 from "../../assets/lotus.jpeg";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import styled from "styled-components";

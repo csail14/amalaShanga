@@ -20,6 +20,7 @@ const FooterInfoContainer = styled.div`
   flex-direction: column;
   color: white;
   text-align: left;
+  font-family: "Abel", sans-serif;
 `;
 const PartnerContainer = styled.div`
   display: flex;

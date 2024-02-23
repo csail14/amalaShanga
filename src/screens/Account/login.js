@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import { loginUser, getUserById } from "../../utils/API/userApi";
 import { loadUserInfo } from "../../actions/user/userActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Fond3 from "../../assets/imageFond3.jpeg";
+import Fond3 from "../../assets/lotus.jpeg";
 import { useMediaQuery } from "react-responsive";
 
 const MainContainer = styled.div`

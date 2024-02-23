@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import logo_amala from "../assets/logo_amala.png";
+import logo_amala from "../assets/logoYogaPsy.png";
 
 const Header = (props) => {
   return (
     <header
       className="header"
       style={{
-        backgroundColor: "#9ec2d7",
+        backgroundColor: "#385E70",
       }}
     >
       <Navbar
@@ -31,7 +31,7 @@ const Header = (props) => {
           <Navbar.Brand>
             <Link to="/home">
               <img
-                style={{ maxWidth: "200px" }}
+                style={{ maxWidth: "200px", maxHeight: "65px" }}
                 src={logo_amala}
                 alt="logo_amala"
               />
@@ -73,7 +73,7 @@ const Header = (props) => {
                 Meditation
               </Nav.Link>
               <Nav.Link
-                href="https://www.yogapsy.fr/28834-yogapsy-yoga-et-psychotherapie.php"
+                href="https://www.yogapsy.fr/"
                 target="_blank"
                 className="header-link"
               >

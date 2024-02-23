@@ -11,7 +11,7 @@ const ModalSubscribe = (props) => {
   const [email, setEmail] = useState("");
   const [comments, setComments] = useState("");
   const [error, setError] = useState("");
-  const stageTitle = "Stage Gretz 26-29 Janvier";
+  const stageTitle = "Stage Gretz Septembre";
   const isLogged = props.user && props.user.isLogged;
   const isMember = isLogged && props.user.infos && props.user.infos.isMember;
   const isAuthorize = isLogged && isMember;
@@ -41,7 +41,7 @@ const ModalSubscribe = (props) => {
   return (
     <Modal show={props.show} onHide={props.handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>M'inscrire au stage du 26 - 29 Janvier 2023</Modal.Title>
+        <Modal.Title>M'inscrire au stage du 7 - 10 Septembre 2023</Modal.Title>
       </Modal.Header>
       {isAuthorize ? (
         <Modal.Body>

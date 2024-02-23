@@ -1,5 +1,5 @@
 import React from "react";
-import Fond3 from "../../assets/imageFond3.jpeg";
+import Fond3 from "../../assets/lotus.jpeg";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import {
@@ -20,7 +20,7 @@ const MainContainer = styled.div`
 const BasketContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 0px;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
@@ -42,8 +42,8 @@ const Studio = (props) => {
     >
       <BasketContainer isMobile={isMobile}>
         <iframe
-          width={isMobile ? "100%" : "650px"}
-          height={isMobile ? "100%" : "400px"}
+          width={isMobile ? "100%" : "850px"}
+          height={isMobile ? "100%" : "600px"}
           src={url}
           title="YouTube video player"
           frameborder="10"
